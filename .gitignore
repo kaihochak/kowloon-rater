@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+
+# Build files
+dist/
+build/
+*.log
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+
+# Compiled source
+*.js
+*.map
+
+# OS generated files
+.DS_Store
+Thumbs.db
