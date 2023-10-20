@@ -45,6 +45,36 @@
   border: 1px solid #000;
 }
 
+/* Rated Target Card */
+.ratedTargetCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+/* Rating Data Card */
+.ratingDataCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+/* Ranking List */
+.rankingList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #000;
+}
+
 /* memberBoard */
 .memberBoard {
   display: flex;
