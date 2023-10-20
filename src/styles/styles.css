@@ -88,16 +88,3 @@ a {
     margin-bottom: 20px;
 }
 
-.memberBoard {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-    padding: 20px;
-}
-
-.memberBoard li {
-    text-align: center;
-    margin: auto;
-    padding: 20px;
-}
