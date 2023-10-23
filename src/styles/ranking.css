@@ -1,8 +1,20 @@
+.rankContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75vw;
+  margin: auto;
+}
+
+/* Title */
 .rankContainer h2 {
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: space-evenly;
   text-align: center;
+  font-size: 40px;
   margin-bottom: 20px;
 }
 
@@ -12,7 +24,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: 100%;
   height: auto;
   padding: 20px;
   margin-bottom: 20px;
@@ -23,9 +35,9 @@
   flex-direction: row;
   justify-content: center;
   padding-inline: 20px;
-  max-width: 90vh;
+  min-height: 60vh;
+  width: 100%;
   gap: 10px;
-  margin: auto;
 }
 
 /* Queue */
@@ -36,6 +48,9 @@
   width: 100%;
   height: auto;
   border: 1px solid #000;
+  border-radius: 30px;
+  padding: 20px;
+  margin-block: 10%;
 }
 
 .queue-item {
@@ -54,55 +69,111 @@
   border: 1px solid #000;
 }
 
-/* Rated Target Card */
-.ratedTargetCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border: 1px solid #000;
-}
-
 /* Rating Data Card */
 .ratingDataCard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   border: 1px solid #000;
+  border-radius: 30px;
+  padding : 20px;
 }
 
-/* Ranking List */
-.rankingList {
+.ratingData {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.ratingDataName {
+  padding:20px;
+  font-size: 40px;
+}
+
+.ratingDataValue {
+  padding: 40px;
+  font-size: 60px;
+  border: 1px solid #000; 
+  border-radius: 20px; 
+}
+
+.ratingTable {
+  width: 90%;
+  padding: 10px;
+}
+
+.ratingTable td {
+  padding: 5px;
+}
+
+/* Ranking List */
+.ranking {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
   border: 1px solid #000;
+  border-radius: 30px;
+  padding : 20px;
+}
+
+.rankingList {
+  padding-top: 25px;
+  width: 90%;
+}
+
+.rankingList th, td{
+  padding: 5px;
+  text-align: start;
+} 
+
+/* Define the width for each column */
+.rankingList th:nth-child(1),
+.rankingList td:nth-child(1) {
+    width: 25%; /* First column takes 20% of the table width */
+}
+
+.rankingList th:nth-child(2),
+.rankingList td:nth-child(2) {
+    width: 60%; /* Second column takes 40% of the table width */
+}
+
+.rankingList th:nth-child(3),
+.rankingList td:nth-child(3) {
+    width: 15%; /* Third column takes 30% of the table width */
 }
 
 /* memberBoard */
-.memberBoard {
+.memberContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  text-align: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px;
+  width: 100%;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.memberBoard {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  width: 100%;
+  justify-content: start;
+  align-items: stretch
 }
 
 .member {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: center;
   text-align: center;
-  border: 1px solid #000;
-  height: 50px;
   width: 100px;
-  margin: auto;
-  padding: 20px;
+  height: 100px;
+  overflow: 100%;
+  border: 1px solid #000;
+  border-radius: 50%;
 }
