@@ -27,7 +27,6 @@ package-lock.json
 .env
 
 # Compiled source
-*.js
 *.map
 
 # OS generated files
