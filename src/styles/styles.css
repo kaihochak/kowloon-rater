@@ -6,14 +6,18 @@ body {
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     background-color: #EEECE9;
     color: #000;
-    padding: 10px 20px;
-    border: #000 1px solid;
+    border-bottom: #000 1px solid;
 }
 
 .box {
@@ -24,17 +28,24 @@ nav {
     user-select: none; /* Prevents text selection */
     cursor: pointer; /* Changes the cursor to a hand pointer */
     font-size: 1.5rem;
+    text-align: center;
 }
 
-.box > span {
+#left-nav #right-nav {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.box:first-child > span { margin-right: auto; }
+#left-nav span  { 
+    margin-right: auto; 
+    margin-left: 10px;
+}
 
-.box:last-child  > span { margin-left: auto;  }
+#right-nav span  { 
+    margin-left: auto;  
+    margin-right: 10px;
+}
 
 #menu {
     font-size: 1rem;
@@ -57,4 +68,9 @@ li {
 a {
     text-decoration: none;
     color: #fff;
+}
+
+
+#content {
+    margin-top: 40px
 }
