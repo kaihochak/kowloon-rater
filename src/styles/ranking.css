@@ -1,98 +1,59 @@
-/* Ranking */
+/* Ranking Session */
 .rankContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  width: 75vw;
-  height: calc(100vh - 50px);
-  margin: auto;
+  /* max-width: 2000px; */
+  height: calc(100vh - 70px);
+  margin: 20px;
+  margin-top: 60px;
+  /* overflow: hidden; */
 }
 
-.rankTitle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  text-align: center;
-  width: 100%;
-  height: auto;
-  padding: 0px;
-  margin-bottom: 20px;
-}
-
-/* Ranking Board */
 .rankingBoard {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-inline: 20px;
-  min-height: 60vh;
+  min-height: 40vh;
   width: 100%;
-  gap: 20px;
+  background-color: #252525;
 }
 
-/* Queue */
-.queue-container {
-  flex-basis: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  height: auto;
-  border: 1px solid #000;
-  border-radius: 30px;
-  padding: 20px;
-  margin-block: 5%;
-  margin-right: auto;
-}
-
-.queue-item {
-  padding-block: 10px;
-  padding-inline: 10px;
-  height: auto;
-  width: auto;
-  border: 1px solid #000;
-}
-
-.queue-input {
-  padding-block: 10px;
-  padding-inline: 10px;
-  height: auto;
-  width: auto;
-  border: 1px solid #000;
-}
-
-/* Rating Data Card */
 .ratingDataCard {
-  flex-basis: 40%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid #000;
-  border-radius: 30px;
+  width: 100%;
+  border: 0.5px solid #000;
+  border-radius: 15px;
   padding : 20px;
+  background-color: #EBEAEA;
 }
 
 .ratingData {
+  font-family: 'Black Han Sans', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  padding: 20px;
+  gap: 20px;
 }
 
 .ratingDataName {
   padding: 20px;
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .ratingDataValue {
   padding: 40px;
   font-size: 60px;
-  border: 1px solid #000; 
-  border-radius: 20px; 
+  border: 0.5px solid #000; 
+  border-radius: 15px;
+  background-color: white; 
+  box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
 }
 
 .ratingTable {
@@ -104,29 +65,99 @@
   padding: 5px;
 }
 
-/* Ranking List */
-.ranking {
-  flex-basis: 30%;
+/* Queue */
+.queue-container {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  height: auto;
+  width: 30%;
+  background-color: white;
+}
+
+.queue-item {
+  padding-block: 10px;
+  padding-inline: 10px;
+  height: auto;
+  width: auto;
+  font-weight: 500;
+  border: 0.5px solid #1c1c1c;
+}
+
+.queue-container > :first-child{
+  color: #1c1c1c;
+  background-color: #A8F5DB;
+}
+
+.queue-input {
+  padding-block: 10px;
+  padding-inline: 10px;
+  height: auto;
+  width: auto;
+  border: 0.5px solid #1c1c1c;
+}
+
+.queue-add-button {
+  padding-block: 10px;
+  padding-inline: 10px;
+  height: auto;
+  width: auto;
+  text-align: start;
+  border: 0.5px solid #1c1c1c;
+  background-color: #EBEAEA;
+  color:#1c1c1c;
+  font-family: 'Noto Sans Display', sans-serif;
+  font-weight: 400;
+}
+
+
+/* Ranking List */
+.ranking {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
   align-items: center;
-  border: 1px solid #000;
-  border-radius: 30px;
-  padding : 20px;
-  margin-block: 5%;
-  margin-right: auto;
+  border: 0.5px solid #000;
+  border-radius: 15px;
+  padding : 30px;
+  background-color: #EBEAEA;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .rankingList {
-  padding-top: 25px;
   width: 90%;
+  font-family: 'Noto Sans Display', sans-serif;
+  font-weight: 500;
+  border-collapse: collapse;
+  border: none; 
+  box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+
 }
 
-.rankingList th, td{
-  padding: 5px;
+.rankingList th {
   text-align: start;
+  padding: 8px;
 } 
+
+.rankingList td{
+  text-align: start;
+  border: 1px solid #000;
+  padding: 8px;
+
+} 
+
+.rankingList th:first-child,
+.rankingList td:first-child {
+  border-left: none; /* Remove left border for the first column */
+}
+
+.rankingList th:last-child,
+.rankingList td:last-child {
+  border-right: none; /* Remove right border for the last column */
+}
 
 /* Define the width for each column */
 .rankingList th:nth-child(1),
@@ -146,30 +177,159 @@
 
 /* memberBoard */
 .memberContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   width: 100%;
-  margin: auto;
-  padding-top: 20px;
+  height: 20vh;
+  background-color: #252525;
 }
 
 .memberBoard {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  width: 100%;
-  justify-content: start;
-  align-items: stretch
+display: flex;
+flex-direction: column;
+height: auto;
+  border-radius: 15px;
+  border: 0.5px solid #1c1c1c;
+  background-color: #EBEAEA;
+  padding: 20px;
+}
+
+.currentRate {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+
+.currentRating {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  padding: 30px;
+  gap: 20px;
+  width: 50vw;
+  height: auto;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: auto;
+  gap: 30px;
+}
+
+.input-container input {
+  width: auto; 
+  padding: 10px; 
+  background-color: #EBEAEA;
+  font-size: 40px; 
+  border: 2px solid #333; 
+  border-radius: 20px; 
+  color: #333; 
+  outline: none; 
+}
+
+.input-container input::placeholder {
+  color: #999; 
+}
+
+
+.input-container button {
+  background-color: #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+#ratingSlider {
+  width: 100%; 
+  height: 20px; 
+  background-color: #EBEAEA;
+  border: none;
+  border-radius: 5px; 
+}
+
+#ratingSlider::-webkit-slider-thumb {
+  width: 20px; 
+  height: 20px;
+  background-color: #333;
+  border: none; 
+  border-radius: 50%;
+  cursor: pointer; 
+}
+
+.currentRatingValue {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  padding: 30px;
+  gap: 20px;
+}
+
+.waitlistRater {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
 }
 
 .member {
   display: flex;
   flex-direction: column; 
   justify-content: center;
-  text-align: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  background-color: #EBEAEA;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.memberImg {
   width: 100px;
   height: 100px;
-  overflow: 100%;
-  border: 1px solid #000;
-  border-radius: 50%;
+  display: flex;
+  margin: 0px;
+  flex-direction: column; 
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  border: 0.5px solid #1c1c1c;
+  border-radius: 50%; background-image: url('../assets/avatar.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
+
+.currentRater .memberImg {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  margin: 0px;
+  flex-direction: column; 
+  justify-content: center;
+  text-align: center;
+  border: 5px solid #A8F5DB;
+  font-size: 30px;
+  font-weight: 800;
+  background-color: #A8F5DB;
+  color: #1c1c1c;
+  box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+}
+
+.currentRater .memberName {
+  font-size: 30px;
+  font-weight: 800;
+  color: black;
 }
