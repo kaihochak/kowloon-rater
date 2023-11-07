@@ -8,16 +8,7 @@ import NavBar from './components/NavBar.js';
 import Home from './components/Pages/Home.js';
 import Create from './components/Pages/Create.js';
 import RankingSession from './components/Ranking/RankingSession.js';
-
-// Initialize the session status state
-const state = {
-    isSessionInProgress: false,
-};
-
-// Function to update isSessionInProgress state
-function updateSessionInProgress(status) {
-    state.isSessionInProgress = status;
-}
+import * as StateManager from './state/state.js';
 
 // Function to confirm closing a session
 function confirmClosing() {
@@ -83,7 +74,7 @@ function initializeContent(component) {
     // Display the specified component
     switch (component) {
         case "testing":
-            updateSessionInProgress(true);
+            StateManager.updateSessionProgress(true);
             contentElement.appendChild(RankingSession());
             break;
         case "create":
@@ -103,5 +94,9 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeContent("testing"); // Call initializeContent once the DOM is ready
 });
 
-// Export functions to be used by other components
-export { updateSessionInProgress };
+// Event listener for state changes
+document.addEventListener('stateChange', () => {
+    // Code to handle state changes globally
+    // For example, you might want to automatically close a session
+    // if the state indicates that no session is in progress
+});

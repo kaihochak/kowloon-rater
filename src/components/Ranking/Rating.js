@@ -29,12 +29,12 @@ function RatingTable() {
 }
 
 
-function RatingDataCard(ratedTarget, session){
+function Rating(ratedTarget, session){
     
     memberList = session.memberNames;
 
     const card = document.createElement("div");
-    card.className = "ratingDataCard rankingBoard-cards";
+    card.className = "rating rankingBoard-cards";
 
     // The queue for rank targets
     card.appendChild(Queue(ratedTarget));
@@ -52,4 +52,4 @@ function RatingDataCard(ratedTarget, session){
     return card;
 }
 
-export default RatingDataCard;
+export default Rating;

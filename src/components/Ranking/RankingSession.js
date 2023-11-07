@@ -26,10 +26,6 @@ function RankingSession(formData) {
     
     // populate the title
     if (session.rankingName === "") session.rankingName = "ranking";
-    // const rankTitle = document.createElement("h2");
-    // rankTitle.className = "rankTitle";
-    // rankTitle.innerHTML = session.rankingName;
-    // rankContainer.appendChild(rankTitle);
 
     // create the ranking board
     rankContainer.appendChild(RankingBoard(session));

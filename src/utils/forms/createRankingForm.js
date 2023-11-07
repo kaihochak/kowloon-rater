@@ -1,4 +1,4 @@
-import { updateSessionInProgress } from "../../app.js";
+import * as StateManager from "../../state/state.js";
 import RankingSession from "../../components/Ranking/RankingSession.js";
 import closeForm from "./closeCreateForm.js";
 import closeContent from "../closeContent.js";
@@ -138,7 +138,7 @@ function renderRankingSession() {
     contentElement.appendChild(RankingSession(formData));
 
     // update the state to indicate that a session is in progress
-    updateSessionInProgress(true);
+    StateManager.updateSessionInProgress(true);
 }
 
 export default createRankingForm;
