@@ -1,12 +1,19 @@
-// MemberPresenter.js
+/* <!-- Course: SENG 513 --> 
+<!-- Date: Oct 23, 2023 --> 
+<!-- Assignment 2 -->
+<!-- Name: Kai Ho Chak --> 
+<!-- UCID: 30147119 --> */
+
+// MemberBoardPresenter.js
 import * as MemberActions from './memberActions.js';
 import { dispatch } from '../models/state.js';
 import MemberBoard from '../views/Members/MemberBoard.js';
 
-class MemberPresenter {
+class MemberBoardPresenter {
 
-    constructor() {
+    constructor(view) {
         this.view = new MemberBoard();
+        this.isRatingSubmitted = false;
         document.addEventListener('stateChange', this.handleStateChange);
     }
 
@@ -51,4 +58,4 @@ class MemberPresenter {
 
 }
 
-export default MemberPresenter;
+export default MemberBoardPresenter;
