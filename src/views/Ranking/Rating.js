@@ -5,8 +5,9 @@
 <!-- UCID: 30147119 --> */
 
 import Queue from "../Tables/Queue.js";
+import * as StateManager from "../../models/state.js";
+import RatedTargetCard from "./RatedTargetCard.js";
 
-const rating = 68;
 const total = 100;
 
 let memberList = [];
@@ -28,25 +29,18 @@ function RatingTable() {
     return table;
 }
 
-
-function Rating(ratedTarget, session){
+function Rating(){
     
-    memberList = session.memberNames;
+    const ratedTargets = StateManager.getTargets();    
 
     const card = document.createElement("div");
     card.className = "rating rankingBoard-cards";
 
     // The queue for rank targets
-    card.appendChild(Queue(ratedTarget));
+    card.appendChild(Queue(ratedTargets));
 
     // The rating data
-    const ratingData = document.createElement("div");
-    ratingData.className = "ratingData";
-    ratingData.innerHTML = `
-        <div class="ratingDataValue">${rating}</div>
-        <div class="ratingDataName">${ratedTarget[0]}</div>
-    `;
-    card.appendChild(ratingData);
+    card.appendChild(RatedTargetCard());
 
 
     return card;

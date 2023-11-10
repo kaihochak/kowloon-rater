@@ -1,5 +1,5 @@
-import * as StateManager from "../../state/state.js";
-import RankingSession from "../../components/Ranking/RankingSession.js";
+import * as StateManager from "../../models/state.js";
+import RankingSession from "../../views/Ranking/RankingSession.js";
 import closeForm from "./closeCreateForm.js";
 import closeContent from "../closeContent.js";
 

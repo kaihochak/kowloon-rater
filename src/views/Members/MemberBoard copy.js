@@ -5,8 +5,9 @@
 <!-- UCID: 30147119 --> */
 
 import MemberCard from "./MemberCard.js";
+import * as StateManager from "../../models/state.js";
 
-function CurrentRate(session) {
+function CurrentRate() {
 
     const currentRate = document.createElement("div");
     currentRate.className = "currentRate";
@@ -15,7 +16,7 @@ function CurrentRate(session) {
     const currentRater = document.createElement("div");
     currentRater.className = "currentRater";
 
-    let firstMember = session.memberNames[0];
+    let firstMember = StateManager.getCurrentMemberName();
 
     currentRater.appendChild(MemberCard(firstMember));
     currentRate.appendChild(currentRater);
@@ -75,19 +76,20 @@ function CurrentRate(session) {
     return currentRate;
 }
 
-function MemberBoard(session) {
+function MemberBoard() {
     
     const memberBoard = document.createElement("div");
     memberBoard.className = "memberBoard";
     
     // Current Rate
-    memberBoard.appendChild(CurrentRate(session));
+    memberBoard.appendChild(CurrentRate());
 
     // Waitlist Rater
+    const memberNames = StateManager.getMemberNames();
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
-    for (let i = 1; i < session.memberNames.length; i++) {
-        waitlistRater.appendChild(MemberCard(session.memberNames[i]));
+    for (let i = 1; i < memberNames.length; i++) {
+        waitlistRater.appendChild(MemberCard(memberNames[i]));
     }
 
     memberBoard.appendChild(waitlistRater);

@@ -7,8 +7,8 @@
 import NavBar from './components/NavBar.js';
 import Home from './components/Pages/Home.js';
 import Create from './components/Pages/Create.js';
-import RankingSession from './components/Ranking/RankingSession.js';
-import * as StateManager from './state/state.js';
+import RankingSession from './views/Ranking/RankingSession.js';
+import * as StateManager from './models/state.js';
 
 // Function to confirm closing a session
 function confirmClosing() {
@@ -28,25 +28,9 @@ function addEventListeners() {
         }
     });
 
-    // document.getElementById("search").addEventListener("click", () => {
-    //     // Handle Search button click, e.g., by showing a Search component
-    // });
-
-    // document.getElementById("explore").addEventListener("click", () => {
-    //     // Handle Explore button click, e.g., by showing an Explore component
-    // });
-
     document.getElementById("create").addEventListener("click", () => {
         initializeContent("create"); // Reinitialize the content with Create component
     });
-
-    // document.getElementById("profile").addEventListener("click", () => {
-    //     // Handle Profile button click, e.g., by showing a Profile component
-    // });
-
-    // document.getElementById("settings").addEventListener("click", () => {
-    //     // Handle Settings button click, e.g., by showing a Settings component
-    // });
 
     // Add event listeners for other navigation links as needed
 }
@@ -74,7 +58,7 @@ function initializeContent(component) {
     // Display the specified component
     switch (component) {
         case "testing":
-            StateManager.updateSessionProgress(true);
+            StateManager.setSessionProgress(true);
             contentElement.appendChild(RankingSession());
             break;
         case "create":
