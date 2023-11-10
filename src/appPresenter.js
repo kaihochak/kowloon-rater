@@ -65,7 +65,7 @@ class AppPresenter {
         // Clear the content element
         if (!this.contentView) {
             // Initialize ContentView and ContentPresenter only once
-            this.contentView = new ContentView();
+            this.contentView = new Content();
             this.contentPresenter = new ContentPresenter(this.contentView);
         }
     }

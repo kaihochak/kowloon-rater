@@ -10,14 +10,13 @@ import AppPresenter from './appPresenter.js';
 class App {
     constructor() {
         this.presenter = new AppPresenter();
-        this.presenter.initializeNav();
-        this.presenter.initializeContent("testing"); // Or another default component
     }
 }
 
 // Wait for the DOM to fully load before initializing the app
 document.addEventListener("DOMContentLoaded", () => {
-    new App(); // Instantiate the App which will in turn initialize the presenter
+    console.log("Initializing app");
+    new App();
 });
 
 // Event listener for state changes

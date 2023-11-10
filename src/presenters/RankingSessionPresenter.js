@@ -7,7 +7,7 @@
 // RankingSessionPresenter.js
 import RankingBoardPresenter from './RankingBoardPresenter.js';
 import MemberBoardPresenter from './MemberBoardPresenter.js';
-import * as StateManager from '../../models/state.js';
+import * as StateManager from '../models/state.js';
 
 class RankingSessionPresenter {
     constructor(rankingSessionView) {
@@ -21,7 +21,7 @@ class RankingSessionPresenter {
         
         // for ranking board
         const rankingBoardView = this.view.getRankingBoardView();
-        this.rankingBoardPresenter = new RankingBoardPresenter(rankingBoardView);
+        // this.rankingBoardPresenter = new RankingBoardPresenter(rankingBoardView);
 
         // for member board
         const memberBoardView = this.view.getMemberBoardView();

@@ -1,11 +1,11 @@
 /* <!-- Course: SENG 513 --> 
 <!-- Date: Nov 10, 2023 --> 
-<!-- Assignment 2 -->
+<!-- Assignment 3 -->
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
 // NavBarPresenter.js
-import * as StateManager from './models/state.js';
+import * as StateManager from '../models/state.js';
 
 class NavBarPresenter {
     constructor(navBarView) {
@@ -24,11 +24,6 @@ class NavBarPresenter {
 
     onCreateClick() {
         // Call a method to handle initializing the Create component
-    }
-
-    confirmClosing() {
-        // TODO: Implement a confirmation dialog
-        return true;
     }
 }
 

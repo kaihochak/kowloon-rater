@@ -5,7 +5,7 @@
 <!-- UCID: 30147119 --> */
 
 // memberActions.js
-import * as ActionTypes from "./models/actionTypes.js";
+import * as ActionTypes from "../models/actionTypes.js";
 
 // Action creator for submitting a rating
 export function submitRating(memberName, target, rating) {

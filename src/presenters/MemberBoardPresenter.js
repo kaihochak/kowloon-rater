@@ -5,7 +5,7 @@
 <!-- UCID: 30147119 --> */
 
 // MemberBoardPresenter.js
-import * as MemberActions from './memberActions.js';
+import * as MemberActions from '../actions/memberActions.js';
 import { dispatch } from '../models/state.js';
 import MemberBoard from '../views/Members/MemberBoard.js';
 

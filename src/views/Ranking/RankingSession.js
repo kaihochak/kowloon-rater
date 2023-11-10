@@ -7,7 +7,7 @@
 // RankingSession.js
 import RankingBoard from "./RankingBoard.js";
 import MemberBoard from "../Members/MemberBoard.js";
-import RankingSessionPresenter from "./RankingSessionPresenter.js";
+import RankingSessionPresenter from "../../presenters/RankingSessionPresenter.js";
 
 class RankingSession {
     constructor() {
