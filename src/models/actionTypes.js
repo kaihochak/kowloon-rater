@@ -1,5 +1,5 @@
 
-// App Actions
+// Utility Actions
 export const SET_SESSION_PROGRESS = 'SET_SESSION_PROGRESS';
 
 // MemberBoard Actions

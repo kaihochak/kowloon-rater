@@ -9,18 +9,18 @@ import AppPresenter from './appPresenter.js';
 
 class App {
     constructor() {
+        console.log("app.js: Initializing app");
         this.presenter = new AppPresenter();
     }
 }
 
 // Wait for the DOM to fully load before initializing the app
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Initializing app");
     new App();
 });
 
 // Event listener for state changes
 document.addEventListener('stateChange', () => {
     // Delegate to the presenter to handle state changes globally
-    this.presenter.handleStateChange();
+    // this.presenter.handleStateChange();
 });

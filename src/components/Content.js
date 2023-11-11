@@ -5,23 +5,29 @@
 <!-- UCID: 30147119 --> */
 
 // Content.js
+import RankingSession from "../views/Ranking/RankingSession.js";
+import * as StateManager from '../models/state.js';
+
+// ContentView.js
 class Content {
     constructor() {
         this.contentElement = document.getElementById("content");
     }
 
+    renderComponent(element) {
+        this.contentElement.innerHTML = ''; // Clear existing content
+        this.contentElement.appendChild(element); // Display the new component
+    }
+
     setPresenter(presenter) {
         this.presenter = presenter;
+        // this.attachEventListeners();
     }
 
     clearContent() {
-        this.contentElement.innerHTML = ''; // Clear existing content
+        this.contentElement.innerHTML = '';
     }
-
-    renderComponent(element) {
-        // Append the component's element to the content area
-        this.contentElement.appendChild(element);
-    }
+    
 }
 
 export default Content;

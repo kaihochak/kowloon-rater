@@ -19,7 +19,7 @@ class AppPresenter {
 
         // Initialize the navigation bar and content
         this.initializeNav();
-        this.contentPresenter.initializeContent("testing");
+        this.initializeContent("testing");
     }
 
     confirmClosing() {
@@ -46,28 +46,22 @@ class AppPresenter {
     }
 
     initializeNav() {
-        console.log("Initializing navigation bar...");
+        console.log("appPresenter.js: Initializing navigation bar...");
 
-        // Create the NavBarView
+        // Create the NavBarView and NavBarPresenter
         this.navBarView = new NavBar();
-
-        // Create the NavBarPresenter and pass the view to it
         this.navBarPresenter = new NavBarPresenter(this.navBarView);
 
         // Get the nav element from the NavBarView and append it to the navBarElement
-        this.navBarElement = document.getElementById("navBar");
-        this.navBarElement.innerHTML = ''; // Clear existing content
         this.navBarElement.appendChild(this.navBarView.getElement());
     }
 
     initializeContent(component) {
-        console.log("Initializing content with component: " + component);
-        // Clear the content element
-        if (!this.contentView) {
-            // Initialize ContentView and ContentPresenter only once
-            this.contentView = new Content();
-            this.contentPresenter = new ContentPresenter(this.contentView);
-        }
+        console.log("appPresenter.js: Initializing content with component: " + component);
+       
+        // Create the contentView and ContentPresenter
+        this.contentView = new Content(component);
+        this.contentPresenter = new ContentPresenter(this.contentView);
     }
 
     changeContent(component) {
@@ -76,6 +70,7 @@ class AppPresenter {
 
     handleStateChange() {
         // Code to handle state changes globally
+        return
     }
 }
 

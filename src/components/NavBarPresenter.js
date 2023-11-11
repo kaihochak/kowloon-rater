@@ -9,6 +9,8 @@ import * as StateManager from '../models/state.js';
 
 class NavBarPresenter {
     constructor(navBarView) {
+        
+        // Logic to link the presenter to the view
         this.view = navBarView;
         this.view.setPresenter(this);
     }

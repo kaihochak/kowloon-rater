@@ -11,7 +11,11 @@ class NavBar {
     }
 
     createNavBarElement() {
+        console.log("NavBar.js: Initializing nav bar");
+
+        // Create the nav element
         const navElement = document.createElement("nav");
+        navElement.innerHTML = ''; // Clear existing content
         navElement.innerHTML = `
             <div id="left-nav" class="box">
                 <span>

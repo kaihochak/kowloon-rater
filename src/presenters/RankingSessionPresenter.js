@@ -11,7 +11,12 @@ import * as StateManager from '../models/state.js';
 
 class RankingSessionPresenter {
     constructor(rankingSessionView) {
+        
+        // Logic to link the presenter to the view
         this.view = rankingSessionView;
+        this.view.setPresenter(this);
+
+        // Logic to handle state changes
         this.setupChildren();
     }
 

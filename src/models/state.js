@@ -1,5 +1,6 @@
 import * as ActionTypes from './actionTypes.js';
-
+import * as UtilityActionCreators from '../actions/utilityActions.js';
+import * as RankingActionCreators from '../actions/rankingActions.js';
 // Event to notify components of state changes
 const stateChangeEvent = new Event('stateChange');
 
@@ -75,7 +76,7 @@ export function getTargetRating(targetIndex) {
 }
 
 export function setSessionProgress(isInProgress) {
-  dispatch(ActionCreators.setSessionProgress(isInProgress));
+  dispatch(UtilityActionCreators.setSessionProgress(isInProgress));
 }
 
 export function getSessionProgress() {
@@ -83,5 +84,5 @@ export function getSessionProgress() {
 }
 
 export function setRankingName(name) {
-  dispatch(ActionCreators.setRankingName(name));
+  dispatch(RankingActionCreators.setRankingName(name));
 }

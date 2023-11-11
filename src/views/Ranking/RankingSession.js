@@ -7,14 +7,14 @@
 // RankingSession.js
 import RankingBoard from "./RankingBoard.js";
 import MemberBoard from "../Members/MemberBoard.js";
-import RankingSessionPresenter from "../../presenters/RankingSessionPresenter.js";
+import * as StateManager from "../../models/state.js";
 
 class RankingSession {
     constructor() {
-        this.presenter = new RankingSessionPresenter(this);
+        this.contentElement = this.createRankingSessionElement();
     }
 
-    createRankContainer() {
+    createRankingSessionElement() {
         const rankingName = StateManager.getRankingName() || "ranking"; // Default ranking name if empty
         const rankContainer = document.createElement("div");
         rankContainer.className = "rankContainer";
@@ -33,6 +33,11 @@ class RankingSession {
         rankContainer.appendChild(memberContainer);
 
         return rankContainer;
+    }
+
+    setPresenter(presenter) {
+        this.presenter = presenter;
+        this.attachEventListeners();
     }
 
     // Method to append the rankContainer to a container
