@@ -5,16 +5,13 @@
 <!-- UCID: 30147119 --> */
 
 // Content.js
-import RankingSession from "../views/Ranking/RankingSession.js";
-import * as StateManager from '../models/state.js';
-
-// ContentView.js
 class Content {
     constructor() {
         this.contentElement = document.getElementById("content");
     }
 
     renderComponent(element) {
+        console.log(`Content.js: appending ${element.className} to content`);
         this.contentElement.innerHTML = ''; // Clear existing content
         this.contentElement.appendChild(element); // Display the new component
     }
@@ -27,7 +24,7 @@ class Content {
     clearContent() {
         this.contentElement.innerHTML = '';
     }
-    
+
 }
 
 export default Content;

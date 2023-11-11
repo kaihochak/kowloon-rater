@@ -4,115 +4,96 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-/* MemberBoard.js */
 import MemberCard from "./MemberCard.js";
+import * as StateManager from "../../models/state.js";
 
-export default class MemberBoard {
-  constructor(presenter) {
-    this.presenter = presenter;
-    this.memberBoard = document.createElement("div");
-    this.memberBoard.className = "memberBoard";
+function CurrentRate() {
 
-    // Initial member and rating values should come from the presenter
-    this.firstMember = this.presenter.getCurrentMemberName();
-    this.firstRating = this.presenter.getInitialRating();
-
-    // Initialize the view components
-    this.initCurrentRate();
-    this.initWaitlistRater();
-  }
-
-  // Method to initialize the "current rater" section
-  initCurrentRate() {
     const currentRate = document.createElement("div");
     currentRate.className = "currentRate";
 
     // Current rater
     const currentRater = document.createElement("div");
     currentRater.className = "currentRater";
-    currentRater.appendChild(MemberCard(this.firstMember));
+
+    let firstMember = StateManager.getCurrentMemberName();
+
+    currentRater.appendChild(MemberCard(firstMember));
     currentRate.appendChild(currentRater);
 
-    // Current Rating
+   // Current Rating
+    let firstRating = 10;
+
     const currentRating = document.createElement("div");
     currentRating.className = "currentRating";
     currentRating.innerHTML = `
-      <div class="input-container">
-          <div></div>
-          <input type="number" id="ratingInput" value="${this.firstRating}" min="0" max="100">
-          <button id="submitRating">Next</button>
-      </div>
-      <input type="range" id="ratingSlider" value="${this.firstRating}" min="0" max="100">
-  `;
-    currentRate.appendChild(currentRating);
-    this.memberBoard.appendChild(currentRate);
+        <div class="input-container">
+            <div></div>
+            <input type="number" id="ratingInput" value="${firstRating}" min="0" max="100">
+            <button id="submitRating">Next</button>
+        </div>
+        <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="100">
+    `;
 
-    // Add event listeners that call presenter methods
-    this.setupEventListeners();
-  }
-  
-  setupEventListeners() {
+    // Append the currentRating element to the DOM
+    document.body.appendChild(currentRating);
+
+    // event listeners to keep the input and slider in sync
     const ratingInput = document.getElementById("ratingInput");
     const ratingSlider = document.getElementById("ratingSlider");
-    const submitButton = document.getElementById("submitRating");
 
-    // Sync input and slider
     ratingInput.addEventListener("input", () => {
-      const value = parseInt(ratingInput.value);
-      ratingSlider.value = value;
-      this.presenter.handleRatingChange(value); // Assuming a method in presenter
+    const value = parseInt(ratingInput.value);
+        ratingSlider.value = value;
     });
 
     ratingSlider.addEventListener("input", () => {
-      const value = parseInt(ratingSlider.value);
-      ratingInput.value = value;
-      this.presenter.handleRatingChange(value); // Assuming a method in presenter
+    const value = parseInt(ratingSlider.value);
+        ratingInput.value = value;  
     });
 
-    // Submit rating
-    submitButton.addEventListener("click", () => {
-      const ratingValue = parseInt(ratingInput.value);
-      this.presenter.submitRating(ratingValue); // Assuming a method in presenter
-    });
+    // Event listener for clicking the "Submit" button
+    const submitButton = document.getElementById("submitRating");
 
-    // Submit with Enter key
-    ratingInput.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
+    function submitRating() {
+        const ratingInput = document.getElementById("ratingInput");
         const ratingValue = parseInt(ratingInput.value);
-        this.presenter.submitRating(ratingValue); // Assuming a method in presenter
-      }
-    });
-  }
+        
+        // Handle the submitted rating value (you can replace this with your logic)
+        console.log("Rating submitted:", ratingValue);
+    }
+    
+    submitButton.addEventListener("click", submitRating);
+    
+    // Event listener for pressing Enter key in the input field
+    ratingInput.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+        submitRating();
+    }});
 
-  // Method to initialize the "waitlist rater" section
-  initWaitlistRater() {
+    currentRate.appendChild(currentRating);
+
+    return currentRate;
+}
+
+function MemberBoard() {
+    
+    const memberBoard = document.createElement("div");
+    memberBoard.className = "memberBoard";
+    
+    // Current Rate
+    memberBoard.appendChild(CurrentRate());
+
+    // Waitlist Rater
+    const memberNames = StateManager.getMemberNames();
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
-    this.memberBoard.appendChild(waitlistRater);
-    // Populate waitlist raters, this could be done via a presenter method
-    this.presenter.populateWaitlist(waitlistRater);
-  }
-
-  // Method to update the "current rater" display
-  updateCurrentRater(memberName) {
-    const currentRater = this.memberBoard.querySelector('.currentRater');
-    // Clear previous member card
-    currentRater.innerHTML = '';
-    // Append new member card
-    currentRater.appendChild(MemberCard(memberName));
-  }
-
-  // Method to update the "waitlist rater" display
-  updateWaitlistRater(memberNames) {
-    const waitlistRater = this.memberBoard.querySelector('.waitlistRater');
-    waitlistRater.innerHTML = ''; // Clear out the old list
     for (let i = 1; i < memberNames.length; i++) {
-      waitlistRater.appendChild(MemberCard(memberNames[i]));
+        waitlistRater.appendChild(MemberCard(memberNames[i]));
     }
-  }
 
-  // Render method to append the memberBoard to a container
-  render(container) {
-    container.appendChild(this.memberBoard);
-  }
+    memberBoard.appendChild(waitlistRater);
+    return memberBoard;
 }
+
+export default MemberBoard;

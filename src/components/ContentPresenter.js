@@ -5,10 +5,10 @@
 <!-- UCID: 30147119 --> */
 
 // ContentPresenter.js
+import RankingSession from '../views/Ranking/RankingSession.js';
 import RankingSessionPresenter from '../presenters/RankingSessionPresenter.js'; 
 import HomeView from './Pages/Home.js'; 
 import CreateView from './Pages/Create.js';
-import RankingSession from '../views/Ranking/RankingSession.js';
 
 class ContentPresenter {
     constructor(contentView) {

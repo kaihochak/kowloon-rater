@@ -11,10 +11,13 @@ import MemberBoard from '../views/Members/MemberBoard.js';
 
 class MemberBoardPresenter {
 
-    constructor(view) {
-        this.view = new MemberBoard();
+    constructor(MemberBoardView) {
+        // Logic to link the presenter to the view
+        this.view = MemberBoardView;
+        this.view.setPresenter(this);
+
         this.isRatingSubmitted = false;
-        document.addEventListener('stateChange', this.handleStateChange);
+        // document.addEventListener('stateChange', this.handleStateChange);
     }
 
     handleStateChange = () => {
@@ -37,7 +40,6 @@ class MemberBoardPresenter {
 
     }
 
-
     // Method to handle adding a member
     addMember(name) {
         // Dispatch an action to add a member
@@ -55,7 +57,6 @@ class MemberBoardPresenter {
         // Dispatch an action to update a member
         dispatch(MemberActions.updateMember(oldName, newName));
     }
-
 }
 
 export default MemberBoardPresenter;

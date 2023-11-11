@@ -47,7 +47,6 @@ class AppPresenter {
 
     initializeNav() {
         console.log("appPresenter.js: Initializing navigation bar...");
-
         // Create the NavBarView and NavBarPresenter
         this.navBarView = new NavBar();
         this.navBarPresenter = new NavBarPresenter(this.navBarView);
