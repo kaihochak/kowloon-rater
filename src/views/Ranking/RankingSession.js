@@ -34,10 +34,10 @@ class RankingSession {
         this.rankingSessionElement.appendChild(RankingBoard());
     }
 
-    renderMemberBoard(element) {
+    renderMemberBoard(memberBoard) {
         const memberContainer = document.createElement("div");
         memberContainer.className = "memberContainer";
-        memberContainer.appendChild(MemberBoard());
+        memberContainer.appendChild(memberBoard);
         this.rankingSessionElement.appendChild(memberContainer);
     }
 }

@@ -4,31 +4,10 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-/* MemberBoard.js */
 import MemberCard from "./MemberCard.js";
 import * as StateManager from "../../models/state.js";
 
-class MemberBoard {
-  constructor() {
-    this.memberBoardElement = this.createMemberBoardElement();
-  }
-
-  setPresenter(presenter) {
-    this.presenter = presenter;
-    // this.attachEventListeners();
-  }
-
-  getElement() {
-    return this.memberBoardElement;
-  }
-
-  createMemberBoardElement() {
-    const memberBoard = document.createElement("div");
-    memberBoard.className = "memberBoard";
-    return memberBoard;
-  }
-
-  createCurrentRateSection() {
+function CurrentRate() {
 
     const currentRate = document.createElement("div");
     currentRate.className = "currentRate";
@@ -42,7 +21,7 @@ class MemberBoard {
     currentRater.appendChild(MemberCard(firstMember));
     currentRate.appendChild(currentRater);
 
-    // Current Rating
+   // Current Rating
     let firstRating = 10;
 
     const currentRating = document.createElement("div");
@@ -64,40 +43,48 @@ class MemberBoard {
     const ratingSlider = document.getElementById("ratingSlider");
 
     ratingInput.addEventListener("input", () => {
-      const value = parseInt(ratingInput.value);
-      ratingSlider.value = value;
+    const value = parseInt(ratingInput.value);
+        ratingSlider.value = value;
     });
 
     ratingSlider.addEventListener("input", () => {
-      const value = parseInt(ratingSlider.value);
-      ratingInput.value = value;
+    const value = parseInt(ratingSlider.value);
+        ratingInput.value = value;  
     });
 
     // Event listener for clicking the "Submit" button
     const submitButton = document.getElementById("submitRating");
 
     function submitRating() {
-      const ratingInput = document.getElementById("ratingInput");
-      const ratingValue = parseInt(ratingInput.value);
-
-      // Handle the submitted rating value (you can replace this with your logic)
-      console.log("Rating submitted:", ratingValue);
+        const ratingInput = document.getElementById("ratingInput");
+        const ratingValue = parseInt(ratingInput.value);
+        
+        // Handle the submitted rating value (you can replace this with your logic)
+        console.log("Rating submitted:", ratingValue);
     }
-
+    
     submitButton.addEventListener("click", submitRating);
-
+    
     // Event listener for pressing Enter key in the input field
     ratingInput.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
+    if (event.key === "Enter") {
         submitRating();
-      }
-    });
+    }});
 
     currentRate.appendChild(currentRating);
-    return currentRate;
-  }
 
-  createWaitlistRaterSection() {
+    return currentRate;
+}
+
+function MemberBoard() {
+    
+    const memberBoard = document.createElement("div");
+    memberBoard.className = "memberBoard";
+    
+    // Current Rate
+    memberBoard.appendChild(CurrentRate());
+
+    // Waitlist Rater
     const memberNames = StateManager.getMemberNames();
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
@@ -105,20 +92,8 @@ class MemberBoard {
         waitlistRater.appendChild(MemberCard(memberNames[i]));
     }
 
-    return waitlistRater;
-  }
-
-  render() {
-    console.log("Rendering MemberBoard...");
-    // Current Rate section
-    const currentRate = this.createCurrentRateSection();
-
-    // Waitlist Rater section
-    const waitlistRater = this.createWaitlistRaterSection();
-
-    this.memberBoardElement.appendChild(currentRate);
-    this.memberBoardElement.appendChild(waitlistRater);
-  }
+    memberBoard.appendChild(waitlistRater);
+    return memberBoard;
 }
 
 export default MemberBoard;

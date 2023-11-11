@@ -10,14 +10,19 @@ import { dispatch } from '../models/state.js';
 import MemberBoard from '../views/Members/MemberBoard.js';
 
 class MemberBoardPresenter {
-
     constructor(MemberBoardView) {
         // Logic to link the presenter to the view
         this.view = MemberBoardView;
         this.view.setPresenter(this);
-
+        // Logic to handle state changes
         this.isRatingSubmitted = false;
+        this.initializeView();
         // document.addEventListener('stateChange', this.handleStateChange);
+    }
+
+    initializeView() {
+        // Logic to create and initialize child presenters and pass the relevant views
+        this.view.render();
     }
 
     handleStateChange = () => {

@@ -7,12 +7,12 @@
 // RankingSessionPresenter.js
 import RankingBoard from '../views/Ranking/RankingBoard.js';
 import RankingBoardPresenter from './RankingBoardPresenter.js';
+import MemberBoard from '../views/Members/MemberBoard.js';
 import MemberBoardPresenter from './MemberBoardPresenter.js';
 import * as StateManager from '../models/state.js';
 
 class RankingSessionPresenter {
     constructor(rankingSessionView) {
-
         // Logic to link the presenter to the view
         this.view = rankingSessionView;
         this.view.setPresenter(this);
@@ -24,21 +24,21 @@ class RankingSessionPresenter {
 
     initializeRankingBoard() {
         console.log("RankingSessionPresenter.js: Initializing ranking board");
-        // Logic to create and initialize child presenters and pass the relevant views
+        // create rankingBoard and rankingBoardPresenter
         // this.rankingBoardView = new RankingBoard();
         // this.rankingBoardPresenter = new RankingBoardPresenter(this.rankingBoardView);
-        // redner the ranking board
+        // render the ranking board
         this.view.renderRankingBoard();
         // this.view.renderRankingBoard(this.rankingBoardView.getElement());
     }
 
     initializeMemberBoard() {
         console.log("RankingSessionPresenter.js: Initializing member board");
-        // Logic to create and initialize child presenters and pass the relevant views
-
-        // for member board
-        // const memberBoardView = this.view.getMemberBoardView();
-        // this.memberBoardPresenter = new MemberBoardPresenter(memberBoardView);
+        // create memberBoard and memberBoardPresenter
+        this.memberBoardView = new MemberBoard();
+        this.memberBoardPresenter = new MemberBoardPresenter(this.memberBoardView);
+        // render the member board
+        this.view.renderMemberBoard(this.memberBoardView.getElement());
     }
 }
 

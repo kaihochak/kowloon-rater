@@ -26,7 +26,7 @@
   background-color: #252525;
 }
 
-.Rating {
+.rating {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
