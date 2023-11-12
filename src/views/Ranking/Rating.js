@@ -4,30 +4,11 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-import Queue from "../Tables/Queue.js";
+import Queue from "../../utils/Tables/Queue.js";
 import * as StateManager from "../../models/state.js";
-import RatedTargetCard from "./RatedTargetCard.js";
+import RatedTargetCard from "../../utils/RatedTargetCard.js";
 
 const total = 100;
-
-let memberList = [];
-
-function RatingTable() {
-    const table = document.createElement("table");
-    table.className = "ratingTable";
-
-    // populate the member list
-    for (let i = 0; i < memberList.length; i++) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${memberList[i]}</td>
-            <td>0</td>
-        `;
-        table.appendChild(row);
-    }
-
-    return table;
-}
 
 function Rating(){
     

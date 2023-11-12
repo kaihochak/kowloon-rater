@@ -7,61 +7,47 @@
 // MemberBoardPresenter.js
 import * as MemberActions from '../actions/memberActions.js';
 import { dispatch } from '../models/state.js';
-import MemberBoard from '../views/Members/MemberBoard.js';
+import * as StateManager from '../models/state.js';
 
 class MemberBoardPresenter {
     constructor(MemberBoardView) {
         // Logic to link the presenter to the view
         this.view = MemberBoardView;
         this.view.setPresenter(this);
-        // Logic to handle state changes
-        this.isRatingSubmitted = false;
         this.initializeView();
-        // document.addEventListener('stateChange', this.handleStateChange);
+        this.currentMemberName = StateManager.getCurrentMemberName();
+        this.currentMemberID = StateManager.getCurrentMemberID();
+        this.currentTargetID = StateManager.getCurrentTargetID();
     }
 
     initializeView() {
+        // Fetch the initial data needed for the MemberBoard
+        const firstMember = StateManager.getCurrentMemberName();
+        const memberNames = StateManager.getMemberNames();
+
         // Logic to create and initialize child presenters and pass the relevant views
-        this.view.render();
+        this.view.render(firstMember, memberNames);
+        this.view.attachEventListeners();
     }
 
-    handleStateChange = () => {
-        const newState = getState();
-        this.view.render(newState);
+    setCurrentMemberName(name) {
+        this.currentMemberName = name;
+        // Update the view with the new current member name
+        this.view.updateCurrentRater(this.currentMemberName);
     }
 
-    // Method to handle submitting a rating
-    submitRating(memberName, target, rating) {
+    handleRatingChange(value) {
+        // Logic to handle a change in the rating input
+        console.log("Rating changed to:", value);
+        // Update the state or handle the change as needed
+    }
+
+    handleSubmitRating(ratingValue) {
+        console.log("Rating submitted for", this.currentMemberName, ":", ratingValue);
         // Dispatch an action to submit the rating
-        dispatch(MemberActions.submitRating(memberName, target, rating));
-        // Update the rating board
-        this.updateRatingBoard(target, rating);
+        dispatch(MemberActions.submitRating(this.currentMemberID, this.currentTargetID, ratingValue));
     }
 
-    // Method to update the RatingBoard
-    updateRatingBoard(target, rating) {
-        // trigger the RatingBoard to update 
-        // via a callback, an event, or by directly invoking a method
-
-    }
-
-    // Method to handle adding a member
-    addMember(name) {
-        // Dispatch an action to add a member
-        dispatch(MemberActions.addMember(name));
-    }
-
-    // Method to handle removing a member
-    removeMember(name) {
-        // Dispatch an action to remove a member
-        dispatch(MemberActions.removeMember(name));
-    }
-
-    // Method to handle updating a member
-    updateMember(oldName, newName) {
-        // Dispatch an action to update a member
-        dispatch(MemberActions.updateMember(oldName, newName));
-    }
 }
 
 export default MemberBoardPresenter;

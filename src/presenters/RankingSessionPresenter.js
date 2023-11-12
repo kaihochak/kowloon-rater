@@ -25,11 +25,10 @@ class RankingSessionPresenter {
     initializeRankingBoard() {
         console.log("RankingSessionPresenter.js: Initializing ranking board");
         // create rankingBoard and rankingBoardPresenter
-        // this.rankingBoardView = new RankingBoard();
-        // this.rankingBoardPresenter = new RankingBoardPresenter(this.rankingBoardView);
+        this.rankingBoardView = new RankingBoard();
+        this.rankingBoardPresenter = new RankingBoardPresenter(this.rankingBoardView);
         // render the ranking board
-        this.view.renderRankingBoard();
-        // this.view.renderRankingBoard(this.rankingBoardView.getElement());
+        this.view.renderRankingBoard(this.rankingBoardView.getElement());
     }
 
     initializeMemberBoard() {

@@ -6,7 +6,6 @@
 
 /* MemberBoard.js */
 import MemberCard from "./MemberCard.js";
-import * as StateManager from "../../models/state.js";
 
 class MemberBoard {
   constructor() {
@@ -15,11 +14,30 @@ class MemberBoard {
 
   setPresenter(presenter) {
     this.presenter = presenter;
-    // this.attachEventListeners();
   }
 
   getElement() {
     return this.memberBoardElement;
+  }
+
+  // Logic to interact with the presenter 
+  attachEventListeners() {
+    if (this.presenter) {
+      this.currentRatingInput.addEventListener("input", () => {
+        this.presenter.handleRatingInput(this.currentRatingInput.value);
+      });
+      this.ratingSlider.addEventListener("input", () => {
+        this.presenter.handleRatingSlider(this.ratingSlider.value);
+      });
+      this.submitButton.addEventListener("click", () => {
+        this.presenter.handleSubmitRating(this.currentRatingInput.value);
+      });
+      this.currentRatingInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+          this.presenter.handleSubmitRating(this.currentRatingInput.value);
+        }
+      });
+    }
   }
 
   createMemberBoardElement() {
@@ -28,23 +46,17 @@ class MemberBoard {
     return memberBoard;
   }
 
-  createCurrentRateSection() {
-
+  createCurrentRateSection(firstMember, firstRating) {
     const currentRate = document.createElement("div");
     currentRate.className = "currentRate";
 
     // Current rater
     const currentRater = document.createElement("div");
     currentRater.className = "currentRater";
-
-    let firstMember = StateManager.getCurrentMemberName();
-
-    currentRater.appendChild(MemberCard(firstMember));
+    currentRater.appendChild(MemberCard(firstMember)); // Use firstMember for the MemberCard
     currentRate.appendChild(currentRater);
 
     // Current Rating
-    let firstRating = 10;
-
     const currentRating = document.createElement("div");
     currentRating.className = "currentRating";
     currentRating.innerHTML = `
@@ -56,65 +68,35 @@ class MemberBoard {
         <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="100">
     `;
 
-    // Append the currentRating element to the DOM
-    document.body.appendChild(currentRating);
-
-    // event listeners to keep the input and slider in sync
-    const ratingInput = document.getElementById("ratingInput");
-    const ratingSlider = document.getElementById("ratingSlider");
-
-    ratingInput.addEventListener("input", () => {
-      const value = parseInt(ratingInput.value);
-      ratingSlider.value = value;
-    });
-
-    ratingSlider.addEventListener("input", () => {
-      const value = parseInt(ratingSlider.value);
-      ratingInput.value = value;
-    });
-
-    // Event listener for clicking the "Submit" button
-    const submitButton = document.getElementById("submitRating");
-
-    function submitRating() {
-      const ratingInput = document.getElementById("ratingInput");
-      const ratingValue = parseInt(ratingInput.value);
-
-      // Handle the submitted rating value (you can replace this with your logic)
-      console.log("Rating submitted:", ratingValue);
-    }
-
-    submitButton.addEventListener("click", submitRating);
-
-    // Event listener for pressing Enter key in the input field
-    ratingInput.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
-        submitRating();
-      }
-    });
-
+    // Store elements that need event listeners
     currentRate.appendChild(currentRating);
+
+    // Store references to elements for event listener attachment
+    this.currentRatingInput = currentRating.querySelector("#ratingInput");
+    this.ratingSlider = currentRating.querySelector("#ratingSlider");
+    this.submitButton = currentRating.querySelector("#submitRating");
+
     return currentRate;
   }
 
-  createWaitlistRaterSection() {
-    const memberNames = StateManager.getMemberNames();
+  createWaitlistRaterSection(memberNames) {
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
-    for (let i = 1; i < memberNames.length; i++) {
-        waitlistRater.appendChild(MemberCard(memberNames[i]));
-    }
+
+    // Loop through member names, skipping the first member
+    memberNames.slice(1).forEach(memberName => {
+        waitlistRater.appendChild(MemberCard(memberName));
+    });
 
     return waitlistRater;
   }
 
-  render() {
-    console.log("Rendering MemberBoard...");
+  render(firstMember, memberNames) {
+    console.log("MemberBoard.render() called");
     // Current Rate section
-    const currentRate = this.createCurrentRateSection();
-
+    const currentRate = this.createCurrentRateSection(firstMember, 50);
     // Waitlist Rater section
-    const waitlistRater = this.createWaitlistRaterSection();
+    const waitlistRater = this.createWaitlistRaterSection(memberNames);
 
     this.memberBoardElement.appendChild(currentRate);
     this.memberBoardElement.appendChild(waitlistRater);

@@ -8,10 +8,10 @@
 import * as ActionTypes from "../models/actionTypes.js";
 
 // Action creator for submitting a rating
-export function submitRating(memberName, target, rating) {
+export function submitRating(memberID, targetID, rating) {
   return {
-    type: SUBMIT_RATING,
-    payload: { memberName, target, rating },
+    type: ActionTypes.SUBMIT_RATING,
+    payload: { memberID, targetID, rating },
   };
 }
 

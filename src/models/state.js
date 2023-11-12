@@ -1,8 +1,6 @@
 import * as ActionTypes from './actionTypes.js';
 import * as UtilityActionCreators from '../actions/utilityActions.js';
 import * as RankingActionCreators from '../actions/rankingActions.js';
-// Event to notify components of state changes
-const stateChangeEvent = new Event('stateChange');
 
 let state = {
   rankingName: "Fruits",
@@ -14,39 +12,68 @@ let state = {
   isSessionInProgress: false,
 };
 
+let listeners = [];
+
+export function registerListener(listener) {
+    listeners.push(listener);
+}
+
 function reducer(state, action) {
   switch (action.type) {
-    // 
+    
+    // member submitting a rating for a target
+    case  ActionTypes.SUBMIT_RATING:
+      // Update the rating for the current target
+      const { rating, targetID } = action.payload;
+      
+      // Create a new Map from the current state's targetRatings
+      const newTargetRatings = new Map(state.targetRatings);
+
+      if (!newTargetRatings.has(targetID)) {
+          newTargetRatings.set(targetID, [rating, 1]);  // [averageRating, count]
+      } else {
+          const [oldAvg, oldCount] = newTargetRatings.get(targetID);
+          const newCount = oldCount + 1;
+          const newAvg = (oldAvg * oldCount + rating) / newCount;
+          newTargetRatings.set(targetID, [newAvg, newCount]);
+      }
+
+      // Return a new state object with the updated targetRatings
+      return {
+          ...state,
+          targetRatings: newTargetRatings
+      };
+
     case 'increment':
       return { count: state.count + 1 };
+
     case ActionTypes.SET_SESSION_PROGRESS:
       return { isSessionInProgress: action.payload };
+    
     case ActionTypes.SET_RANKING_NAME:
       return { rankingName: action.payload };
+    
     default:
       return state;
   }
-
 }
 
 // Dispatch function to update state using the reducer and then notify any listeners
 export function dispatch(action) {
+  const oldState = { ...state }; // Make a copy of the current state
   const newState = reducer(state, action);
-  if (newState !== state) {
-    state = newState;
-    document.dispatchEvent(stateChangeEvent);
-    render(); // This assumes you have a render function that updates the UI
+
+  if (newState !== oldState) {
+      state = newState;
+      document.dispatchEvent(new Event('stateChange'));
+      listeners.forEach(listener => listener(state));
   }
 }
 
-// Render function to update the UI
-function render() {
-  // Update the UI
-}
+
 
 
 // Getters and Setters
-
 export function getRankingName() {
   return state.rankingName;
 }
@@ -55,8 +82,16 @@ export function getCurrentMemberName() {
   return state.memberNames[state.currentRaterIndex];
 }
 
+export function getCurrentMemberID() {
+  return state.currentRaterIndex;
+}
+
 export function getMemberNames() {
   return state.memberNames;
+}
+
+export function getCurrentTargetID() {
+  return state.currentTargetIndex;
 }
 
 export function getCurrentTarget() {

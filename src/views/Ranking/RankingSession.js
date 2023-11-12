@@ -30,8 +30,8 @@ class RankingSession {
         return this.rankingSessionElement;
     }
 
-    renderRankingBoard(element) {
-        this.rankingSessionElement.appendChild(RankingBoard());
+    renderRankingBoard(rankingBoard) {
+        this.rankingSessionElement.appendChild(rankingBoard);
     }
 
     renderMemberBoard(memberBoard) {

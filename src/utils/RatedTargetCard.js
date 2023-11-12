@@ -4,7 +4,7 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-import * as StateManager from "../../models/state.js";
+import * as StateManager from "../models/state.js";
 
 function RatedTargetCard() {
 
