@@ -17,6 +17,10 @@ export default function getChangedParts(newState, oldState) {
         changed.push('targetRatings');
     }
 
+    if (!arraysEqual(newState.sortedRankings, oldState.sortedRankings)) {
+        changed.push('sortedRankings');
+    }
+
     if (newState.currentTargetIndex !== oldState.currentTargetIndex) {
         changed.push('currentTargetIndex');
     }

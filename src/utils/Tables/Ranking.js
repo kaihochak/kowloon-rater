@@ -1,10 +1,11 @@
 /* <!-- Course: SENG 513 --> 
-<!-- Date: Oct 23, 2023 --> 
-<!-- Assignment 2 -->
+<!-- Date: Nov 10, 2023 --> 
+<!-- Assignment 3 -->
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-function RankingList() {
+// Ranking.js
+function Ranking(sortedRankings) {
     const rankingList = document.createElement('table');
     rankingList.className = 'rankingList';
     rankingList.innerHTML = `
@@ -12,38 +13,22 @@ function RankingList() {
             <th>Rank</th>
             <th>Target</th>
             <th>Rating</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>cherry</td>
-            <td>97</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>blackberry</td>
-            <td>95</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>kiwi</td>
-            <td>83</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>papaya</td>
-            <td>84</td>
-        </tr>
-    `;
+        </tr>`
+
+    console.log(sortedRankings);
+
+    if (sortedRankings) {
+        sortedRankings.forEach((item, index) => {
+            console.log(item);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index+1}</td>
+                <td>${item.target}</td>
+                <td>${Math.round(item.averageRating * 1000) / 1000}</td>
+            `;
+            rankingList.appendChild(row);
+        });
+    }
     return rankingList;
 }
-
-
-function Ranking(){
-    const ranking = document.createElement('div');
-    ranking.className = 'ranking rankingBoard-cards';
-    ranking.appendChild(RankingList());     
-    
-    return ranking;
-}
-
 export default Ranking;

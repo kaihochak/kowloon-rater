@@ -38,7 +38,7 @@ class MemberBoard {
         }
       });
       this.currentRatingInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && this.currentRatingInput.value <= 10) {
           this.presenter.handleSubmitRating(this.currentRatingInput.value);
         }
       });

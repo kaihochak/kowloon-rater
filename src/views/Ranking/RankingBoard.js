@@ -6,10 +6,11 @@
 
 // RankingBoard.js
 import Queue from "../../utils/Tables/Queue.js";
+import Ranking from "../../utils/Tables/Ranking.js";
 import RatedTargetCard from "../../utils/RatedTargetCard.js";
 
 class RankingBoard {
-    constructor(){
+    constructor() {
         this.rankingBoardElement = this.createRankingBoardElement();
     }
 
@@ -24,7 +25,7 @@ class RankingBoard {
     createRankingBoardElement() {
         const rankingBoard = document.createElement("div");
         rankingBoard.className = "rankingBoard";
-        
+
         return rankingBoard;
     }
 
@@ -44,43 +45,14 @@ class RankingBoard {
         return card;
     }
 
-    createRankingSection() {   
+    createRankingSection(sortedRankings) {
         const ranking = document.createElement('div');
         ranking.className = 'ranking rankingBoard-cards';
-        
-        const rankingList = document.createElement('table');
-        rankingList.className = 'rankingList';
-  
-        rankingList.innerHTML = `
-            <tr>
-                <th>Rank</th>
-                <th>Target</th>
-                <th>Rating</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>cherry</td>
-                <td>97</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>blackberry</td>
-                <td>95</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>kiwi</td>
-                <td>83</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>papaya</td>
-                <td>84</td>
-            </tr>
-        `;
-        
-        ranking.appendChild(rankingList);     
-        
+
+        // The ranking data
+        this.ranking = Ranking(sortedRankings);
+        ranking.appendChild(this.ranking);
+
         return ranking;
     }
 
@@ -97,17 +69,17 @@ class RankingBoard {
         }
     }
 
-    renderRankingSection() {
+    renderRankingSection(rankedTargets) {
         let rankingSection = this.rankingBoardElement.querySelector('.ranking');
         // Check if the ranking section already exists
-       if (rankingSection) {
-           // Update existing section
-           rankingSection.replaceWith(this.createRankingSection());
-       } else {
-           // Create and append new section
-           rankingSection = this.createRankingSection();
-           this.rankingBoardElement.appendChild(rankingSection);
-       }
+        if (rankingSection) {
+            // Update existing section
+            rankingSection.replaceWith(this.createRankingSection(rankedTargets));
+        } else {
+            // Create and append new section
+            rankingSection = this.createRankingSection(rankedTargets);
+            this.rankingBoardElement.appendChild(rankingSection);
+        }
     }
 
     highlightCurrentTarget() {
@@ -140,7 +112,7 @@ class RankingBoard {
 
     nextTarget(ratedTargets, currentTargetID, currentRating) {
         // Remove the popup
-        const centeredTargetCard =  document.querySelector('.centered-ratingCard');
+        const centeredTargetCard = document.querySelector('.centered-ratingCard');
         document.body.removeChild(centeredTargetCard);
         // Remove the overlay
         const overlay = this.rankingBoardElement.querySelector('.overlay');

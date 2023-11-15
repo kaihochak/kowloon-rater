@@ -14,7 +14,7 @@ class RankingBoardPresenter {
         this.view = rankingBoardView;
         this.view.setPresenter(this);
         StateManager.registerListener(this.handleRatingStateChange, ['targets','currentTargetIndex','targetRatings']);
-        StateManager.registerListener(this.handleRankingStateChange, []);
+        StateManager.registerListener(this.handleRankingStateChange, ['sortedRankings']);
         StateManager.registerListener(this.handleTargetRatingDone, ['targetRatingDone']);
         this.initializeView();
     }
@@ -43,13 +43,10 @@ class RankingBoardPresenter {
     }
 
     handleRankingStateChange = () => {
-        // console.log("RankingBoardPresenter handling ranking state change");
-
         // Fetch the updated data needed for the RankingBoard
-        // const rankedTargets = StateManager.getRankedTargets();
-
+        const rankedTargets = StateManager.getRankedTargets();
         // Update the view with the new data
-        this.view.renderRankingSection();
+        this.view.renderRankingSection(rankedTargets);
     }
 
     handleTargetRatingDone = (state) => {
