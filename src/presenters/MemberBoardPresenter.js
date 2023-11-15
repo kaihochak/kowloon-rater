@@ -1,6 +1,6 @@
 /* <!-- Course: SENG 513 --> 
-<!-- Date: Oct 23, 2023 --> 
-<!-- Assignment 2 -->
+<!-- Date: Nov 10, 2023 --> 
+<!-- Assignment 3 -->
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
@@ -42,7 +42,7 @@ class MemberBoardPresenter {
         // console.log("Rating submitted for", this.currentMemberName, ":", ratingValue);
 
         // Dispatch an action to submit the rating
-        dispatch(MemberActions.submitRating(this.currentMemberIndex, this.currentTargetID, parseInt(ratingValue)));
+        dispatch(MemberActions.submitRating(this.currentMemberIndex, StateManager.getCurrentTargetID(), parseFloat(ratingValue)));
 
         // Update the view with the new current member name
         if (this.currentMemberIndex+1 < this.memberNames.length) this.currentMemberIndex++;
@@ -53,8 +53,8 @@ class MemberBoardPresenter {
         }
         this.view.updateCurrentRater(StateManager.getMemberName(this.currentMemberIndex));
 
-        // Update the wailist
-        
+        // Update the view with the new wailist member names
+        this.view.updateWaitlistRaters(this.memberNames, this.currentMemberIndex);
     }
 
     handleTargetRatingDone = (state) => {

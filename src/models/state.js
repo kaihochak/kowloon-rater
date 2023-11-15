@@ -38,11 +38,11 @@ function reducer(state, action) {
       const newTargetRatings = new Map(state.targetRatings);
 
       if (!newTargetRatings.has(targetID)) {
-        newTargetRatings.set(targetID, [parseInt(rating), 1]);  // [averageRating, count]
+        newTargetRatings.set(targetID, [parseFloat(rating), 1]);  // [averageRating, count]
       } else {
         const [oldAvg, oldCount] = newTargetRatings.get(targetID);
         const newCount = oldCount + 1;
-        const newAvg = (oldAvg * oldCount + parseInt(rating)) / newCount;
+        const newAvg = (oldAvg * oldCount + parseFloat(rating)) / newCount;
         newTargetRatings.set(targetID, [newAvg, newCount]);
       }
 

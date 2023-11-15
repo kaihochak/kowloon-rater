@@ -33,7 +33,9 @@ class MemberBoard {
 
       // submit rating
       this.submitButton.addEventListener("click", () => {
-        this.presenter.handleSubmitRating(this.currentRatingInput.value);
+        if (this.currentRatingInput.value <= 10) {
+          this.presenter.handleSubmitRating(this.currentRatingInput.value);
+        }
       });
       this.currentRatingInput.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
@@ -47,6 +49,14 @@ class MemberBoard {
   updateCurrentRater(name) {
     this.currentRaterImg.style.backgroundImage = `url(./assets/images/${name}.jpg)`;
     this.currentRaterName.innerHTML = name;
+    this.ratingSlider.value = this.currentRatingInput.value = 5;
+  }
+
+  // Update the waitlist
+  updateWaitlistRaters(membersNames, currentRaterIndex) {
+    const newWaitlist = this.createWaitlistRaterSection(membersNames, currentRaterIndex);
+    this.waitlistRater.replaceWith(newWaitlist);
+    this.waitlistRater = newWaitlist;
   }
 
   createMemberBoardElement() {
@@ -68,17 +78,15 @@ class MemberBoard {
     this.currentRaterImg = currentRater.querySelector(".memberImg");
     this.currentRaterName = currentRater.querySelector(".memberName");
 
-
     // Current Rating
     const currentRating = document.createElement("div");
     currentRating.className = "currentRating";
     currentRating.innerHTML = `
         <div class="input-container">
-            <div></div>
-            <input type="number" id="ratingInput" value="${firstRating}" min="0" max="100">
+            <input type="number" id="ratingInput" value="${firstRating}" min="0" max="10" step="0.1">
             <button id="submitRating" class="nextButton">Next</button>
         </div>
-        <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="100">
+        <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="10" step="0.1">
     `;
 
     // Store elements that need event listeners
@@ -96,9 +104,13 @@ class MemberBoard {
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
 
-    // Loop through member names, skipping the first member
-    memberNames.slice(currentRaterIndex+1).forEach(memberName => {
-        waitlistRater.appendChild(MemberCard(memberName));
+    // Loop through member names, skipping the current member
+    const endPart = memberNames.slice(currentRaterIndex + 1);
+    const startPart = memberNames.slice(0, currentRaterIndex);
+    const wrappedArray = endPart.concat(startPart);
+
+    wrappedArray.forEach(memberName => {
+      waitlistRater.appendChild(MemberCard(memberName));
     });
 
     return waitlistRater;
@@ -107,12 +119,12 @@ class MemberBoard {
   render(firstMember, memberNames, currentRaterIndex) {
     // console.log("MemberBoard.render() called");
     // Current Rate section
-    const currentRate = this.createCurrentRateSection(firstMember, 50);
+    const currentRate = this.createCurrentRateSection(firstMember, 5);
     // Waitlist Rater section
-    const waitlistRater = this.createWaitlistRaterSection(memberNames, currentRaterIndex);
+    this.waitlistRater = this.createWaitlistRaterSection(memberNames, currentRaterIndex);
 
     this.memberBoardElement.appendChild(currentRate);
-    this.memberBoardElement.appendChild(waitlistRater);
+    this.memberBoardElement.appendChild(this.waitlistRater);
   }
 
   disableRating() {
