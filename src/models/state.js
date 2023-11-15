@@ -8,6 +8,7 @@ let state = {
   memberNames: ["Ching", "Kai", "A-A-Ron", "B. Ennis", "Rich Serg.", "ObMa", "T. $helby", "Mr. Perv"],
   targets: ["Apple", "Banana", "Orange", "Pear", "Pineapple", "Strawberry", "Watermelon", "Grape"],
   targetRatings: new Map(),
+  sortedRankings: [],
   currentTargetIndex: 0,
   targetRatingDone: false,
   isSessionInProgress: false,
@@ -54,19 +55,19 @@ function reducer(state, action) {
 
     case ActionTypes.SHOW_FINAL_RATING:
       // Return a new state object with the updated targetRatingDone
-      return { 
+      return {
         ...state,
         targetRatingDone: true
       };
-      
+
     case ActionTypes.SET_NEXT_TARGET:
-      // Return a new state object with the updated targetRatingDone
       return {
         ...state,
         targetRatingDone: false,
         currentTargetIndex: state.currentTargetIndex + 1,
+        sortedRankings: updatedSortedRankings(),
       };
-  
+
     case ActionTypes.SET_SESSION_PROGRESS:
       return { isSessionInProgress: action.payload };
 
@@ -76,6 +77,17 @@ function reducer(state, action) {
     default:
       return state;
   }
+}
+
+function updatedSortedRankings() {
+  state.sortedTargets = Array.from(state.targetRatings)
+    .map(([target, [average]]) => ({
+      target: state.targets[target],
+      averageRating: average 
+    }))
+    .sort((a, b) => b.averageRating - a.averageRating);
+
+  return state.sortedTargets;
 }
 
 // Dispatch function to update state using the reducer and then notify any listeners
@@ -115,7 +127,6 @@ export function getRankingName() {
   return state.rankingName;
 }
 
-
 export function getMemberName(index) {
   return state.memberNames[index];
 }
@@ -154,4 +165,8 @@ export function getSessionProgress() {
 
 export function setRankingName(name) {
   dispatch(RankingActionCreators.setRankingName(name));
+}
+
+export function getRankedTargets() {
+  return state.sortedRankings;
 }
