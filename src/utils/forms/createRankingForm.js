@@ -1,5 +1,5 @@
-import { updateSessionInProgress } from "../../app.js";
-import RankingSession from "../../components/Ranking/RankingSession.js";
+import * as StateManager from "../../models/state.js";
+import RankingSession from "../../views/Ranking/RankingSession.js";
 import closeForm from "./closeCreateForm.js";
 import closeContent from "../closeContent.js";
 
@@ -92,7 +92,7 @@ function createMemberNameInputs(numMembers) {
     const createRankForm = document.querySelector("#createRankForm");
     const memberInputsContainer = createRankForm.querySelector("#memberInputs");
 
-    console.log("numMembers: " + numMembers);
+    // console.log("numMembers: " + numMembers);
 
     // Store the current number of input fields
     const currentNumInputs = memberInputsContainer.children.length;
@@ -117,7 +117,7 @@ function createMemberNameInputs(numMembers) {
     const memberNameInputs = Array.from(memberInputsContainer.children);
     memberNameInputs.forEach((memberInput, index) => {
         memberInput.addEventListener("input", () => {
-            console.log(`Member ${index + 1} Name: ${memberInput.value}`);
+            // console.log(`Member ${index + 1} Name: ${memberInput.value}`);
             formData.memberNames[index] = memberInput.value;
         });
     });
@@ -127,8 +127,8 @@ function createMemberNameInputs(numMembers) {
 function renderRankingSession() {
 
     // Create a new session
-    console.log("Creating ranking session...");
-    console.log(formData);
+    // console.log("Creating ranking session...");
+    // console.log(formData);
 
     // close the current content 
     closeContent();
@@ -138,7 +138,7 @@ function renderRankingSession() {
     contentElement.appendChild(RankingSession(formData));
 
     // update the state to indicate that a session is in progress
-    updateSessionInProgress(true);
+    StateManager.updateSessionInProgress(true);
 }
 
 export default createRankingForm;

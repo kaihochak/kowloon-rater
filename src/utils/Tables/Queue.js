@@ -120,7 +120,7 @@ function Queue(items) {
     const queueContainer = document.createElement('div');
     queueContainer.className = 'queue-container rankingBoard-cards';
 
-    items.forEach((item, index) => {
+    items.forEach((item) => {
         const queueRow = createQueueRow(item);
         queueContainer.appendChild(queueRow);
     });
