@@ -28,18 +28,17 @@ class RankingBoard {
         return rankingBoard;
     }
 
-    createRatingSection(ratedTargets, currentTarget, currentRating) {
+    createRatingSection(ratedTargets, currentTargetID, currentRating) {
         const card = document.createElement("div");
         card.className = "rating rankingBoard-cards";
 
         // The queue for rank targets
-        this.queue = Queue(ratedTargets);
+        this.queue = Queue(ratedTargets.slice(currentTargetID));
         card.appendChild(this.queue);
 
         // The rating data
-        // console.log("RankingBoard.js: Creating RatedTargetCard: ", currentRating);
         if (currentRating != "-") currentRating = Math.round(currentRating * 10) / 10;
-        this.ratedTargetCard = RatedTargetCard(currentRating, currentTarget);
+        this.ratedTargetCard = RatedTargetCard(currentRating, ratedTargets[currentTargetID]);
         card.appendChild(this.ratedTargetCard);
 
         return card;
@@ -85,24 +84,22 @@ class RankingBoard {
         return ranking;
     }
 
-    renderRatingSection(ratedTargets, currentTarget, currentRating) {
-        // console.log("RankingBoard.js: Rendering Rating Section");
+    renderRatingSection(ratedTargets, currentTargetID, currentRating) {
         // Check if the rating section already exists
         let ratingSection = this.rankingBoardElement.querySelector('.rating');
         if (ratingSection) {
             // Update existing section
-            ratingSection.replaceWith(this.createRatingSection(ratedTargets, currentTarget, currentRating));
+            ratingSection.replaceWith(this.createRatingSection(ratedTargets, currentTargetID, currentRating));
         } else {
             // Create and append new section
-            ratingSection = this.createRatingSection(ratedTargets, currentTarget, currentRating);
+            ratingSection = this.createRatingSection(ratedTargets, currentTargetID, currentRating);
             this.rankingBoardElement.appendChild(ratingSection);
         }
     }
 
     renderRankingSection() {
-        // console.log("RankingBoard.js: Rendering Ranking Section");
-       // Check if the ranking section already exists
-       let rankingSection = this.rankingBoardElement.querySelector('.ranking');
+        let rankingSection = this.rankingBoardElement.querySelector('.ranking');
+        // Check if the ranking section already exists
        if (rankingSection) {
            // Update existing section
            rankingSection.replaceWith(this.createRankingSection());
@@ -136,22 +133,20 @@ class RankingBoard {
 
         // Close popup when next button is clicked
         nextButton.addEventListener('click', () => {
-
-            // console.log("RankingBoard.js: Next button clicked");
             this.presenter.nextTarget();
-            // console.log("RankingBoard.js: Next button clicked");
-
         });
 
     }
 
-    nextTarget() {
+    nextTarget(ratedTargets, currentTargetID, currentRating) {
         // Remove the popup
         const centeredTargetCard =  document.querySelector('.centered-ratingCard');
         document.body.removeChild(centeredTargetCard);
         // Remove the overlay
         const overlay = this.rankingBoardElement.querySelector('.overlay');
         this.rankingBoardElement.removeChild(overlay);
+        // Update the rating section
+        this.renderRatingSection(ratedTargets, currentTargetID, currentRating);
     }
 }
 

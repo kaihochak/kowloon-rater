@@ -22,11 +22,11 @@ class RankingBoardPresenter {
     initializeView() {
         // Fetch the initial data needed for the RankingBoard
         const ratedTargets = StateManager.getTargets();
-        const currentTarget = StateManager.getCurrentTarget();
+        const currentTargetID = StateManager.getCurrentTargetID();
         const currentRating = StateManager.getCurrentTargetRating();
 
         // Initialization logic. Fetch data from StateManager if needed
-        this.view.renderRatingSection(ratedTargets, currentTarget, currentRating);
+        this.view.renderRatingSection(ratedTargets, currentTargetID, currentRating);
         this.view.renderRankingSection();
     }
 
@@ -35,11 +35,11 @@ class RankingBoardPresenter {
 
         // Fetch the updated data needed for the RankingBoard
         const ratedTargets = StateManager.getTargets();
-        const currentTarget = StateManager.getCurrentTarget();
+        const currentTargetID = StateManager.getCurrentTargetID();
         const currentRating = StateManager.getCurrentTargetRating();
         
         // Update the view with the new data
-        this.view.renderRatingSection(ratedTargets, currentTarget, currentRating[0]);
+        this.view.renderRatingSection(ratedTargets, currentTargetID, currentRating[0]);
     }
 
     handleRankingStateChange = () => {
@@ -56,17 +56,12 @@ class RankingBoardPresenter {
         if (state.targetRatingDone) {
             this.view.highlightCurrentTarget();
         } else {
-            this.view.nextTarget();
             // Fetch the updated data needed for the RankingBoard
             const ratedTargets = StateManager.getTargets();
-            const currentTarget = StateManager.getCurrentTarget();
+            const currentTargetID = StateManager.getCurrentTargetID();
             const currentRating = StateManager.getCurrentTargetRating();
-
-            console.log("ratedTargets:", ratedTargets);
-            console.log("currentTarget:", currentTarget);
-            console.log("currentRating:", currentRating);
             // Update the view with the new data
-            this.view.renderRatingSection(ratedTargets, currentTarget, currentRating[0]);
+            this.view.nextTarget(ratedTargets, currentTargetID, currentRating[0]);
         }
     }
 
