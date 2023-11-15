@@ -13,7 +13,9 @@ class RankingBoardPresenter {
     constructor(rankingBoardView) {
         this.view = rankingBoardView;
         this.view.setPresenter(this);
-        StateManager.registerListener(this.handleStateChange);
+        StateManager.registerListener(this.handleRatingStateChange, ['targets','currentTargetIndex','targetRatings']);
+        StateManager.registerListener(this.handleRankingStateChange, []);
+        StateManager.registerListener(this.handleTargetRatingDone, ['targetRatingDone']);
         this.initializeView();
     }
 
@@ -26,21 +28,51 @@ class RankingBoardPresenter {
         // Initialization logic. Fetch data from StateManager if needed
         this.view.renderRatingSection(ratedTargets, currentTarget, currentRating);
         this.view.renderRankingSection();
-        // this.view.attachEventListeners();
     }
 
-    handleStateChange = (newState) => {
+    handleRatingStateChange = () => {
+        // console.log("RankingBoardPresenter handling rating state change");
 
         // Fetch the updated data needed for the RankingBoard
         const ratedTargets = StateManager.getTargets();
         const currentTarget = StateManager.getCurrentTarget();
         const currentRating = StateManager.getCurrentTargetRating();
+        
+        // Update the view with the new data
+        this.view.renderRatingSection(ratedTargets, currentTarget, currentRating[0]);
+    }
+
+    handleRankingStateChange = () => {
+        // console.log("RankingBoardPresenter handling ranking state change");
+
+        // Fetch the updated data needed for the RankingBoard
+        // const rankedTargets = StateManager.getRankedTargets();
 
         // Update the view with the new data
-        this.view.renderRatingSection(ratedTargets, currentTarget, currentRating);
         this.view.renderRankingSection();
     }
 
+    handleTargetRatingDone = (state) => {
+        if (state.targetRatingDone) {
+            this.view.highlightCurrentTarget();
+        } else {
+            this.view.nextTarget();
+            // Fetch the updated data needed for the RankingBoard
+            const ratedTargets = StateManager.getTargets();
+            const currentTarget = StateManager.getCurrentTarget();
+            const currentRating = StateManager.getCurrentTargetRating();
+
+            console.log("ratedTargets:", ratedTargets);
+            console.log("currentTarget:", currentTarget);
+            console.log("currentRating:", currentRating);
+            // Update the view with the new data
+            this.view.renderRatingSection(ratedTargets, currentTarget, currentRating[0]);
+        }
+    }
+
+    nextTarget() {
+        dispatch(RankingActions.nextTarget());
+    }
 }
 
 export default RankingBoardPresenter;

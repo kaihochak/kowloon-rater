@@ -23,7 +23,7 @@ class RankingSessionPresenter {
     }
 
     initializeRankingBoard() {
-        console.log("RankingSessionPresenter.js: Initializing ranking board");
+        // console.log("RankingSessionPresenter.js: Initializing ranking board");
         // create rankingBoard and rankingBoardPresenter
         this.rankingBoardView = new RankingBoard();
         this.rankingBoardPresenter = new RankingBoardPresenter(this.rankingBoardView);
@@ -32,7 +32,7 @@ class RankingSessionPresenter {
     }
 
     initializeMemberBoard() {
-        console.log("RankingSessionPresenter.js: Initializing member board");
+        // console.log("RankingSessionPresenter.js: Initializing member board");
         // create memberBoard and memberBoardPresenter
         this.memberBoardView = new MemberBoard();
         this.memberBoardPresenter = new MemberBoardPresenter(this.memberBoardView);

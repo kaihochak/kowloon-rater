@@ -9,7 +9,6 @@ import * as StateManager from '../models/state.js';
 
 class NavBarPresenter {
     constructor(navBarView) {
-        
         // Logic to link the presenter to the view
         this.view = navBarView;
         this.view.setPresenter(this);
@@ -17,9 +16,9 @@ class NavBarPresenter {
 
     onLogoClick() {
         if (StateManager.getSessionProgress() && !this.confirmClosing()) {
-            console.log("Session is in progress. Do not close the session.");
+            // console.log("Session is in progress. Do not close the session.");
         } else {
-            console.log("Session is not in progress. Close the session.");
+            // console.log("Session is not in progress. Close the session.");
             // Call a method to handle reinitializing the content
         }
     }

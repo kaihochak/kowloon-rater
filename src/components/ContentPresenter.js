@@ -20,7 +20,7 @@ class ContentPresenter {
     }
 
     initializeContent(component) {
-        console.log("ContentPresenter.js: Initializing content with component: " + component);
+        // console.log("ContentPresenter.js: Initializing content with component: " + component);
 
         this.view.clearContent(); // Delegate to view
 

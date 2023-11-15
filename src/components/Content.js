@@ -11,7 +11,7 @@ class Content {
     }
 
     renderComponent(element) {
-        console.log(`Content.js: appending ${element.className} to content`);
+        // console.log(`Content.js: appending ${element.className} to content`);
         this.contentElement.innerHTML = ''; // Clear existing content
         this.contentElement.appendChild(element); // Display the new component
     }

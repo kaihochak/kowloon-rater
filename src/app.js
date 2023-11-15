@@ -9,7 +9,7 @@ import AppPresenter from './appPresenter.js';
 
 class App {
     constructor() {
-        console.log("app.js: Initializing app");
+        // console.log("app.js: Initializing app");
         this.presenter = new AppPresenter();
     }
 }

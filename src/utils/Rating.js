@@ -4,9 +4,7 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-import Queue from "../../utils/Tables/Queue.js";
-import * as StateManager from "../../models/state.js";
-import RatedTargetCard from "../../utils/RatedTargetCard.js";
+import * as StateManager from "../models/state.js";
 
 const total = 100;
 

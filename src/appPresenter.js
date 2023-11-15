@@ -30,10 +30,10 @@ class AppPresenter {
     addEventListeners() {
         document.getElementById("logo").addEventListener("click", () => {
             if (StateManager.getSessionProgress() && !this.confirmClosing()) {
-                console.log("Session is in progress. Do not close the session.");
+                // console.log("Session is in progress. Do not close the session.");
                 return; // Do not close the session
             } else {
-                console.log("Session is not in progress. Close the session.");
+                // console.log("Session is not in progress. Close the session.");
                 this.initializeContent("home"); // Reinitialize the content when Home is clicked
             }
         });
@@ -46,7 +46,7 @@ class AppPresenter {
     }
 
     initializeNav() {
-        console.log("appPresenter.js: Initializing navigation bar...");
+        // console.log("appPresenter.js: Initializing navigation bar...");
         // Create the NavBarView and NavBarPresenter
         this.navBarView = new NavBar();
         this.navBarPresenter = new NavBarPresenter(this.navBarView);
@@ -56,7 +56,7 @@ class AppPresenter {
     }
 
     initializeContent(component) {
-        console.log("appPresenter.js: Initializing content with component: " + component);
+        // console.log("appPresenter.js: Initializing content with component: " + component);
        
         // Create the contentView and ContentPresenter
         this.contentView = new Content(component);

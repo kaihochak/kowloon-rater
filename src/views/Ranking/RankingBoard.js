@@ -15,19 +15,16 @@ class RankingBoard {
 
     setPresenter(presenter) {
         this.presenter = presenter;
-        // this.attachEventListeners();
     }
 
     getElement() {
         return this.rankingBoardElement;
     }
 
-    // Logic to interact with the presenter
-
-
     createRankingBoardElement() {
         const rankingBoard = document.createElement("div");
         rankingBoard.className = "rankingBoard";
+        
         return rankingBoard;
     }
 
@@ -36,10 +33,14 @@ class RankingBoard {
         card.className = "rating rankingBoard-cards";
 
         // The queue for rank targets
-        card.appendChild(Queue(ratedTargets));
+        this.queue = Queue(ratedTargets);
+        card.appendChild(this.queue);
 
         // The rating data
-        card.appendChild(RatedTargetCard());
+        // console.log("RankingBoard.js: Creating RatedTargetCard: ", currentRating);
+        if (currentRating != "-") currentRating = Math.round(currentRating * 10) / 10;
+        this.ratedTargetCard = RatedTargetCard(currentRating, currentTarget);
+        card.appendChild(this.ratedTargetCard);
 
         return card;
     }
@@ -85,17 +86,73 @@ class RankingBoard {
     }
 
     renderRatingSection(ratedTargets, currentTarget, currentRating) {
-        console.log("RankingBoard.js: Rendering Rating Section");
-        const ratingSection = this.createRatingSection(ratedTargets, currentTarget, currentRating);
-        this.rankingBoardElement.appendChild(ratingSection);
+        // console.log("RankingBoard.js: Rendering Rating Section");
+        // Check if the rating section already exists
+        let ratingSection = this.rankingBoardElement.querySelector('.rating');
+        if (ratingSection) {
+            // Update existing section
+            ratingSection.replaceWith(this.createRatingSection(ratedTargets, currentTarget, currentRating));
+        } else {
+            // Create and append new section
+            ratingSection = this.createRatingSection(ratedTargets, currentTarget, currentRating);
+            this.rankingBoardElement.appendChild(ratingSection);
+        }
     }
 
     renderRankingSection() {
-        console.log("RankingBoard.js: Rendering Ranking Section");
-        const rankingSection = this.createRankingSection();
-        this.rankingBoardElement.appendChild(rankingSection);
+        // console.log("RankingBoard.js: Rendering Ranking Section");
+       // Check if the ranking section already exists
+       let rankingSection = this.rankingBoardElement.querySelector('.ranking');
+       if (rankingSection) {
+           // Update existing section
+           rankingSection.replaceWith(this.createRankingSection());
+       } else {
+           // Create and append new section
+           rankingSection = this.createRankingSection();
+           this.rankingBoardElement.appendChild(rankingSection);
+       }
     }
 
+    highlightCurrentTarget() {
+        // console.log("RankingBoard.js: Highlighting current target");
+
+        // Add overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        this.rankingBoardElement.appendChild(overlay);
+
+        // Create a Popup of the current target
+        const ratedTargetCard = this.rankingBoardElement.querySelector('.ratingData');
+        const centeredTargetCard = ratedTargetCard.cloneNode(true);
+        centeredTargetCard.classList.add('highlighted');
+        centeredTargetCard.classList.add('centered-ratingCard');
+
+        // Next Button to close popup
+        const nextButton = document.createElement('button');
+        centeredTargetCard.appendChild(nextButton)
+        document.body.appendChild(centeredTargetCard);
+        nextButton.className = 'nextButton';
+        nextButton.innerHTML = "Next";
+
+        // Close popup when next button is clicked
+        nextButton.addEventListener('click', () => {
+
+            // console.log("RankingBoard.js: Next button clicked");
+            this.presenter.nextTarget();
+            // console.log("RankingBoard.js: Next button clicked");
+
+        });
+
+    }
+
+    nextTarget() {
+        // Remove the popup
+        const centeredTargetCard =  document.querySelector('.centered-ratingCard');
+        document.body.removeChild(centeredTargetCard);
+        // Remove the overlay
+        const overlay = this.rankingBoardElement.querySelector('.overlay');
+        this.rankingBoardElement.removeChild(overlay);
+    }
 }
 
 export default RankingBoard;

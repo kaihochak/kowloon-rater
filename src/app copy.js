@@ -20,10 +20,10 @@ function confirmClosing() {
 function addEventListeners() {
     document.getElementById("logo").addEventListener("click", () => {
         if (state.isSessionInProgress && !confirmClosing()) {
-            console.log("Session is in progress. Do not close the session.");
+            // console.log("Session is in progress. Do not close the session.");
             return; // Do not close the session
         } else {
-            console.log("Session is not in progress. Close the session.");
+            // console.log("Session is not in progress. Close the session.");
             initializeContent("home"); // Reinitialize the content when Home is clicked
         }
     });
@@ -37,7 +37,7 @@ function addEventListeners() {
 
 // Function to initialize the navigation bar
 function initializeNav() {
-    console.log("Initializing navigation bar...");
+    // console.log("Initializing navigation bar...");
 
     // Add event listeners for navigation bar buttons
     const navBar = document.getElementById("navBar");
@@ -49,7 +49,7 @@ function initializeNav() {
 
 // Function to initialize the content
 function initializeContent(component) {
-    console.log("Initializing content with component: " + component);
+    // console.log("Initializing content with component: " + component);
 
     // Clear the content element
     const contentElement = document.getElementById("content");

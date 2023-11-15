@@ -4,12 +4,8 @@
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-import * as StateManager from "../models/state.js";
-
-function RatedTargetCard() {
-
-    const currentRating = StateManager.getCurrentTargetRating() 
-    const currentTarget = StateManager.getCurrentTarget();
+// RatedTargetCard.js
+function RatedTargetCard(currentRating, currentTarget) {
 
     const ratingData = document.createElement("div");
     ratingData.className = "ratingData";

@@ -116,7 +116,6 @@
   font-weight: 400;
 }
 
-
 /* Ranking List */
 .ranking {
   flex-basis: 60%;
@@ -207,7 +206,6 @@ height: auto;
   padding-bottom: 20px;
 }
 
-
 .currentRating {
   display: flex;
   flex-direction: column; 
@@ -245,14 +243,13 @@ height: auto;
   color: #999; 
 }
 
-
-.input-container button {
+/* .input-container button {
   background-color: #ccc;
   padding: 5px 10px;
   cursor: pointer;
   border: none;
   outline: none;
-}
+} */
 
 #ratingSlider {
   width: 100%; 
@@ -338,4 +335,39 @@ height: auto;
   font-size: 30px;
   font-weight: 800;
   color: black;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
+}
+
+.highlighted {
+  position: relative;
+  z-index: 1000; 
+}
+
+.centered-ratingCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  width: 50%;
+  height: 50%;
+  border-radius: 10px;
+  background-color: #EBEAEA;
+}
+
+.nextButton {
+  font-size: large;
+  width: 100px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #EBEAEA;
 }

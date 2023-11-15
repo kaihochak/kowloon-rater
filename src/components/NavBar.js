@@ -11,7 +11,7 @@ class NavBar {
     }
 
     createNavBarElement() {
-        console.log("NavBar.js: Initializing nav bar");
+        // console.log("NavBar.js: Initializing nav bar");
 
         // Create the nav element
         const navElement = document.createElement("nav");

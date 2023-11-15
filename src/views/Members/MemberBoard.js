@@ -23,12 +23,15 @@ class MemberBoard {
   // Logic to interact with the presenter 
   attachEventListeners() {
     if (this.presenter) {
+      // make rating input and slider work together
       this.currentRatingInput.addEventListener("input", () => {
-        this.presenter.handleRatingInput(this.currentRatingInput.value);
+        this.ratingSlider.value = this.currentRatingInput.value;
       });
       this.ratingSlider.addEventListener("input", () => {
-        this.presenter.handleRatingSlider(this.ratingSlider.value);
+        this.currentRatingInput.value = this.ratingSlider.value;
       });
+
+      // submit rating
       this.submitButton.addEventListener("click", () => {
         this.presenter.handleSubmitRating(this.currentRatingInput.value);
       });
@@ -38,6 +41,12 @@ class MemberBoard {
         }
       });
     }
+  }
+
+  // Update the current rater's name
+  updateCurrentRater(name) {
+    this.currentRaterImg.style.backgroundImage = `url(./assets/images/${name}.jpg)`;
+    this.currentRaterName.innerHTML = name;
   }
 
   createMemberBoardElement() {
@@ -56,6 +65,10 @@ class MemberBoard {
     currentRater.appendChild(MemberCard(firstMember)); // Use firstMember for the MemberCard
     currentRate.appendChild(currentRater);
 
+    this.currentRaterImg = currentRater.querySelector(".memberImg");
+    this.currentRaterName = currentRater.querySelector(".memberName");
+
+
     // Current Rating
     const currentRating = document.createElement("div");
     currentRating.className = "currentRating";
@@ -63,7 +76,7 @@ class MemberBoard {
         <div class="input-container">
             <div></div>
             <input type="number" id="ratingInput" value="${firstRating}" min="0" max="100">
-            <button id="submitRating">Next</button>
+            <button id="submitRating" class="nextButton">Next</button>
         </div>
         <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="100">
     `;
@@ -79,28 +92,43 @@ class MemberBoard {
     return currentRate;
   }
 
-  createWaitlistRaterSection(memberNames) {
+  createWaitlistRaterSection(memberNames, currentRaterIndex) {
     const waitlistRater = document.createElement("div");
     waitlistRater.className = "waitlistRater";
 
     // Loop through member names, skipping the first member
-    memberNames.slice(1).forEach(memberName => {
+    memberNames.slice(currentRaterIndex+1).forEach(memberName => {
         waitlistRater.appendChild(MemberCard(memberName));
     });
 
     return waitlistRater;
   }
 
-  render(firstMember, memberNames) {
-    console.log("MemberBoard.render() called");
+  render(firstMember, memberNames, currentRaterIndex) {
+    // console.log("MemberBoard.render() called");
     // Current Rate section
     const currentRate = this.createCurrentRateSection(firstMember, 50);
     // Waitlist Rater section
-    const waitlistRater = this.createWaitlistRaterSection(memberNames);
+    const waitlistRater = this.createWaitlistRaterSection(memberNames, currentRaterIndex);
 
     this.memberBoardElement.appendChild(currentRate);
     this.memberBoardElement.appendChild(waitlistRater);
   }
+
+  disableRating() {
+    // console.log("MemberBoard.disableRating() called");
+    this.currentRatingInput.disabled = true;
+    this.ratingSlider.disabled = true;
+    this.submitButton.disabled = true;
+  }
+
+  enableRating() {
+    // console.log("MemberBoard.enableRating() called");
+    this.currentRatingInput.disabled = false;
+    this.ratingSlider.disabled = false;
+    this.submitButton.disabled = false;
+  }
+
 }
 
 export default MemberBoard;

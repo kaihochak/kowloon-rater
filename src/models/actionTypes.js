@@ -5,10 +5,7 @@ export const SET_SESSION_PROGRESS = 'SET_SESSION_PROGRESS';
 // MemberBoard Actions
 export const SUBMIT_RATING = 'SUBMIT_RATING';
 export const ADD_MEMBER = 'ADD_MEMBER';
-export const REMOVE_MEMBER = 'REMOVE_MEMBER';
-export const UPDATE_MEMBER = 'UPDATE_MEMBER';
-export const SET_CURRENT_RATER = 'SET_CURRENT_RATER';
-export const SET_NEXT_RATER = 'SET_NEXT_RATER';
+export const UPDATE_CURRENT_TARGET = 'UPDATE_CURRENT_TARGET';
 
 // RatingBoard Actions
 export const ADD_SCORE = 'ADD_SCORE';

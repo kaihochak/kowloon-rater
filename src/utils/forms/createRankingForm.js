@@ -92,7 +92,7 @@ function createMemberNameInputs(numMembers) {
     const createRankForm = document.querySelector("#createRankForm");
     const memberInputsContainer = createRankForm.querySelector("#memberInputs");
 
-    console.log("numMembers: " + numMembers);
+    // console.log("numMembers: " + numMembers);
 
     // Store the current number of input fields
     const currentNumInputs = memberInputsContainer.children.length;
@@ -117,7 +117,7 @@ function createMemberNameInputs(numMembers) {
     const memberNameInputs = Array.from(memberInputsContainer.children);
     memberNameInputs.forEach((memberInput, index) => {
         memberInput.addEventListener("input", () => {
-            console.log(`Member ${index + 1} Name: ${memberInput.value}`);
+            // console.log(`Member ${index + 1} Name: ${memberInput.value}`);
             formData.memberNames[index] = memberInput.value;
         });
     });
@@ -127,8 +127,8 @@ function createMemberNameInputs(numMembers) {
 function renderRankingSession() {
 
     // Create a new session
-    console.log("Creating ranking session...");
-    console.log(formData);
+    // console.log("Creating ranking session...");
+    // console.log(formData);
 
     // close the current content 
     closeContent();

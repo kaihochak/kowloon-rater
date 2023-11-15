@@ -14,19 +14,21 @@ class MemberBoardPresenter {
         // Logic to link the presenter to the view
         this.view = MemberBoardView;
         this.view.setPresenter(this);
-        this.initializeView();
-        this.currentMemberName = StateManager.getCurrentMemberName();
-        this.currentMemberID = StateManager.getCurrentMemberID();
+        this.memberNames = StateManager.getMemberNames();
+        this.currentMemberName = StateManager.getMemberName(0);
+        this.currentMemberIndex = 0;
         this.currentTargetID = StateManager.getCurrentTargetID();
+        StateManager.registerListener(this.handleTargetRatingDone, ['targetRatingDone']);
+        this.initializeView();
     }
 
     initializeView() {
         // Fetch the initial data needed for the MemberBoard
-        const firstMember = StateManager.getCurrentMemberName();
+        const firstMember = StateManager.getMemberName(this.currentMemberIndex);
         const memberNames = StateManager.getMemberNames();
 
         // Logic to create and initialize child presenters and pass the relevant views
-        this.view.render(firstMember, memberNames);
+        this.view.render(firstMember, memberNames, this.currentMemberIndex);
         this.view.attachEventListeners();
     }
 
@@ -36,18 +38,32 @@ class MemberBoardPresenter {
         this.view.updateCurrentRater(this.currentMemberName);
     }
 
-    handleRatingChange(value) {
-        // Logic to handle a change in the rating input
-        console.log("Rating changed to:", value);
-        // Update the state or handle the change as needed
-    }
-
     handleSubmitRating(ratingValue) {
-        console.log("Rating submitted for", this.currentMemberName, ":", ratingValue);
+        // console.log("Rating submitted for", this.currentMemberName, ":", ratingValue);
+
         // Dispatch an action to submit the rating
-        dispatch(MemberActions.submitRating(this.currentMemberID, this.currentTargetID, ratingValue));
+        dispatch(MemberActions.submitRating(this.currentMemberIndex, this.currentTargetID, parseInt(ratingValue)));
+
+        // Update the view with the new current member name
+        if (this.currentMemberIndex+1 < this.memberNames.length) this.currentMemberIndex++;
+        // if everyone is done rating, show the final rating and pause member board
+        else {
+            this.currentMemberIndex = 0;
+            dispatch(MemberActions.showFinalRating());
+        }
+        this.view.updateCurrentRater(StateManager.getMemberName(this.currentMemberIndex));
+
+        // Update the wailist
+        
     }
 
+    handleTargetRatingDone = (state) => {
+        if (state.targetRatingDone) {
+            this.view.disableRating();
+        } else {
+            this.view.enableRating();
+        }
+    }
 }
 
 export default MemberBoardPresenter;
