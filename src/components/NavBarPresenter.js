@@ -5,6 +5,8 @@
 <!-- UCID: 30147119 --> */
 
 // NavBarPresenter.js
+import * as UtilityActions from '../actions/utilityActions.js';
+import { dispatch } from '../models/state.js';
 import * as StateManager from '../models/state.js';
 
 class NavBarPresenter {
@@ -15,16 +17,13 @@ class NavBarPresenter {
     }
 
     onLogoClick() {
-        if (StateManager.getSessionProgress() && !this.confirmClosing()) {
-            // console.log("Session is in progress. Do not close the session.");
-        } else {
-            // console.log("Session is not in progress. Close the session.");
-            // Call a method to handle reinitializing the content
-        }
-    }
-
-    onCreateClick() {
-        // Call a method to handle initializing the Create component
+        dispatch(UtilityActions.goToCreate());
+        // if (StateManager.getSessionProgress()) {
+        //     // console.log("Session is in progress. Do not close the session.");
+        // } else {
+        //     // console.log("Session is not in progress. Close the session.");
+        //     // Call a method to handle reinitializing the content
+        // }
     }
 }
 

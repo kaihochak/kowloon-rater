@@ -50,7 +50,7 @@
 
 .ratingDataName {
   padding: 20px;
-  font-size: 50px;
+  font-size: 35px;
 }
 
 .ratingDataValue {
@@ -371,7 +371,7 @@ height: auto;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  gap: 20px;
+  gap: 40px;
 }
 
 .endButton {
@@ -396,7 +396,7 @@ height: auto;
   width: auto; 
   height: 30px;
   padding: 10px; 
-  background-color: #EBEAEA;
+  background-color: #ffffff;
   font-size: 20px; 
   border-radius: 20px; 
   color: #333; 

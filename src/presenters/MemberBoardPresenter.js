@@ -19,6 +19,7 @@ class MemberBoardPresenter {
         this.currentMemberIndex = 0;
         this.currentTargetID = StateManager.getCurrentTargetID();
         StateManager.registerListener(this.handleTargetRatingDone, ['targetRatingDone']);
+        StateManager.registerListener(this.handleIsSessionInProgressChange, ['isSessionInProgress']);
         this.initializeView();
     }
 
@@ -38,12 +39,14 @@ class MemberBoardPresenter {
         this.view.updateCurrentRater(this.currentMemberName);
     }
 
-    handleSubmitRating(ratingValue) {
+    submitRating(ratingValue) {
         // Dispatch an action to submit the rating
         dispatch(MemberActions.submitRating(this.currentMemberIndex, StateManager.getCurrentTargetID(), parseFloat(ratingValue)));
 
         // Update the view with the new current member name
-        if (this.currentMemberIndex+1 < this.memberNames.length) this.currentMemberIndex++;
+        if (this.currentMemberIndex+1 < this.memberNames.length) {
+            this.currentMemberIndex++;
+        }
         // if everyone is done rating, show the final rating and pause member board
         else {
             this.currentMemberIndex = 0;
@@ -61,6 +64,10 @@ class MemberBoardPresenter {
         } else {
             this.view.enableRating();
         }
+    }
+
+    handleIsSessionInProgressChange = () => {
+        this.view.disableRating();
     }
 }
 

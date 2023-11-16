@@ -5,13 +5,15 @@
 <!-- UCID: 30147119 --> */
 
 // Content.js
+import Create from '../views/Create.js';
+
 class Content {
     constructor() {
         this.contentElement = document.getElementById("content");
     }
 
     renderComponent(element) {
-        // console.log(`Content.js: appending ${element.className} to content`);
+        console.log(`Content.js: appending ${element.className} to content`);
         this.contentElement.innerHTML = ''; // Clear existing content
         this.contentElement.appendChild(element); // Display the new component
     }
@@ -23,6 +25,10 @@ class Content {
 
     clearContent() {
         this.contentElement.innerHTML = '';
+    }
+
+    createCreateView() {
+        this.contentElement = Create();
     }
 
 }

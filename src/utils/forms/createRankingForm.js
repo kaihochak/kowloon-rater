@@ -1,7 +1,5 @@
 import * as StateManager from "../../models/state.js";
 import RankingSession from "../../views/Ranking/RankingSession.js";
-import closeForm from "./closeCreateForm.js";
-import closeContent from "../closeContent.js";
 
 const formData = {
     rankingName: "", // Initialize with empty values
@@ -10,12 +8,7 @@ const formData = {
 };
 
 // Function to create the pop-up form for Ranking
-function createRankingForm(formStatus) {
-    
-    // Close the existing form if one is open
-    if (formStatus.isFormOpen) {
-        closeForm(formStatus);
-    }
+function createRankingForm() {
 
     const createRankForm = document.createElement("div");
     createRankForm.className = "createForm";
@@ -23,7 +16,6 @@ function createRankingForm(formStatus) {
     createRankForm.innerHTML = `
         <div class="formTitle">
             <h3>Create ranking</h3>
-            <button id="closeForm">Close</button>
         </div>
         <form class="formContent">
             <input type="text" id="rankingName" name="rankingName" placeholder="Ranking name">
@@ -75,14 +67,6 @@ function createRankingForm(formStatus) {
     const contentElement = document.getElementById("content");
     contentElement.appendChild(createRankForm);
 
-    // Set the flag to indicate that a form is open
-    formStatus.isFormOpen = true;
-
-    // Add an event listener to the close button
-    const closeFormButton = createRankForm.querySelector("#closeForm");
-    closeFormButton.addEventListener("click", () => {
-        closeForm(formStatus);
-    });
 }
 
 // Function to create member name input fields
@@ -125,17 +109,9 @@ function createMemberNameInputs(numMembers) {
 
 // Function to render a ranking session
 function renderRankingSession() {
-
-    // Create a new session
-    // console.log("Creating ranking session...");
-    // console.log(formData);
-
-    // close the current content 
-    closeContent();
-
     // Render the ranking session
     const contentElement = document.getElementById("content");
-    contentElement.appendChild(RankingSession(formData));
+    contentElement.appendChild( (formData));
 
     // update the state to indicate that a session is in progress
     StateManager.updateSessionInProgress(true);

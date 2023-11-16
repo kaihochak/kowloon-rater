@@ -118,7 +118,7 @@ class RankingBoard {
             const endButton = document.createElement('button');
             centeredTargetCard.appendChild(endButton)
             endButton.className = 'endButton';
-            endButton.innerHTML = "End session";
+            endButton.innerHTML = "End";
             buttons.appendChild(endButton);
 
             // Close popup when next button is clicked
@@ -130,7 +130,7 @@ class RankingBoard {
             const newItem = document.createElement('div');
             newItem.className = 'additem-input-container';
             newItem.innerHTML = `
-                <input type="text" id="addNewItem" placeholder="add more">
+                <input type="text" id="addNewItem" placeholder="rate more?">
                 <button id="addNewItemButton" class="endButton">Add</button>
             `;
             buttons.appendChild(newItem);
@@ -139,7 +139,7 @@ class RankingBoard {
             let addNewItemButton = document.getElementById('addNewItemButton');
             let addNewItem = document.getElementById('addNewItem');
             addNewItemButton.addEventListener('click', () => {
-                // this.presenter.nextTarget(addNewItem.value);
+                this.presenter.nextTarget(addNewItem.value);
             });
         }
     }
@@ -153,6 +153,10 @@ class RankingBoard {
         this.rankingBoardElement.removeChild(overlay);
         // Update the rating section
         this.renderRatingSection(ratedTargets, currentTargetID, currentRating);
+    }
+
+    showFinalRanking() {
+        this.rankingBoardElement.removeChild(this.rankingBoardElement.querySelector('.rating'));
     }
 }
 

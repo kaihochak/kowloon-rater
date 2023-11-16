@@ -1,13 +1,10 @@
 /* <!-- Course: SENG 513 --> 
-<!-- Date: Oct 23, 2023 --> 
-<!-- Assignment 2 -->
+<!-- Date: Nov 10, 2023 --> 
+<!-- Assignment 3 -->
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
-// A Constructor for a QueueData
-// function QueueData(name) {
-//     this.name = name;
-// }
+// Queue.js
 
 const displayLimit = 5;
 

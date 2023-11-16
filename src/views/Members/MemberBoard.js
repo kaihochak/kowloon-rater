@@ -34,12 +34,12 @@ class MemberBoard {
       // submit rating
       this.submitButton.addEventListener("click", () => {
         if (this.currentRatingInput.value && this.currentRatingInput.value <= 10) {
-          this.presenter.handleSubmitRating(this.currentRatingInput.value);
+          this.presenter.submitRating(this.currentRatingInput.value);
         }
       });
       this.currentRatingInput.addEventListener("keyup", (event) => {
         if (event.key === "Enter" && this.currentRatingInput.value && this.currentRatingInput.value <= 10) {
-          this.presenter.handleSubmitRating(this.currentRatingInput.value);
+          this.presenter.submitRating(this.currentRatingInput.value);
         }
       });
     }
@@ -50,7 +50,6 @@ class MemberBoard {
     this.currentRaterImg.style.backgroundImage = `url(./assets/images/${name}.jpg)`;
     this.currentRaterName.innerHTML = name;
     this.ratingSlider.value = this.currentRatingInput.value = "";
-
   }
 
   // Update the waitlist

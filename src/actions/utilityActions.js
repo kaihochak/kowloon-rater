@@ -7,10 +7,17 @@
 // utilityActions.js
 import * as ActionTypes from "../models/actionTypes.js";
 
-// Action creator for submitting a rating
-export function setSessionProgress(isInProgress) {
+// Action creator for Create a Form
+export function goToCreate() {
+  console.log("AAA");
   return {
-    type: ActionTypes.SET_SESSION_PROGRESS,
-    payload: isInProgress,
+    type: ActionTypes.GO_TO_CREATE,
+  };
+}
+
+// Action creator for Create a Ranking Session
+export function goToRanking() {
+  return {
+    type: ActionTypes.GO_TO_RANKING,
   };
 }

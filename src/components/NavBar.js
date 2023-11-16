@@ -1,6 +1,6 @@
 /* <!-- Course: SENG 513 --> 
 <!-- Date: Nov 10, 2023 --> 
-<!-- Assignment 2 -->
+<!-- Assignment 3 -->
 <!-- Name: Kai Ho Chak --> 
 <!-- UCID: 30147119 --> */
 
@@ -51,7 +51,6 @@ class NavBar {
     attachEventListeners() {
         // Attach event listeners to the nav element and delegate events to the presenter
         this.navElement.querySelector("#logo").addEventListener("click", () => this.presenter.onLogoClick());
-        // this.navElement.querySelector("#logo").addEventListener("click", () => this.presenter.onLogoClick());
         // this.navElement.querySelector("#create").addEventListener("click", () => this.presenter.onCreateClick());
     }
 }

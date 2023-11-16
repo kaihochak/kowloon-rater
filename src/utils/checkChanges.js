@@ -1,6 +1,10 @@
 export default function getChangedParts(newState, oldState) {
     let changed = [];
 
+    if (newState.page !== oldState.page) {
+        changed.push('page');
+    }
+
     if (newState.rankingName !== oldState.rankingName) {
         changed.push('rankingName');
     }

@@ -4,14 +4,15 @@ import * as RankingActionCreators from '../actions/rankingActions.js';
 import getChangedParts from '../utils/checkChanges.js';
 
 let state = {
+  page: "ranking",
   rankingName: "Fruits",
   memberNames: ["Ching", "Kai", "A-A-Ron", "B. Ennis", "Rich Serg.", "ObMa", "T. $helby", "Mr. Perv"],
-  targets: ["Apple", "Banana"],
+  targets: ["George Best", "Diego Maradona", "Cristiano Ronaldo", "Ronaldo Nazário", "Zinedine Zidane", "Alfredo Di Stefano","Johan Cruyff" , "Franz Beckenbauer","Lionel Messi", "Pele"],
   targetRatings: new Map(),
   sortedRankings: [],
   currentTargetIndex: 0,
   targetRatingDone: false,
-  isSessionInProgress: false,
+  isSessionInProgress: true,
   isLastItem: false,
 };
 
@@ -27,9 +28,24 @@ export function registerListener(listener, subscribedParts) {
   }
 }
 
-
 function reducer(state, action) {
   switch (action.type) {
+
+    case undefined:
+      return state;
+
+    // Utility actions
+    case ActionTypes.GO_TO_CREATE:
+      return {
+        ...state,
+        page: "create"
+      };
+
+    case ActionTypes.GO_TO_RANKING:
+      return {
+        ...state,
+        page: "ranking"
+      };
 
     // member submitting a rating for a target
     case ActionTypes.SUBMIT_RATING:
@@ -55,6 +71,7 @@ function reducer(state, action) {
       };
 
     case ActionTypes.SHOW_FINAL_RATING:
+      console.log("AAA");
       // if it is the last item
       if (state.targets.length == state.currentTargetIndex+1) {
         return {
@@ -78,11 +95,22 @@ function reducer(state, action) {
         sortedRankings: updatedSortedRankings(),
       };
 
-    case ActionTypes.SET_SESSION_PROGRESS:
-      return { isSessionInProgress: action.payload };
+    case ActionTypes.ADD_TARGET:
+      return {
+        ...state,
+        targetRatingDone: false,
+        targets: [...state.targets, action.payload],
+        currentTargetIndex: state.currentTargetIndex + 1,
+        sortedRankings: updatedSortedRankings(),
+      };
 
-    case ActionTypes.SET_RANKING_NAME:
-      return { rankingName: action.payload };
+    case ActionTypes.END_SESSION:
+      return {
+        ...state,
+        isSessionInProgress: false,
+        targetRatingDone: false,
+        sortedRankings: updatedSortedRankings(),
+      };
 
     default:
       return state;
@@ -183,4 +211,8 @@ export function getRankedTargets() {
 
 export function getIsLastItem() {
   return state.isLastItem;
+}
+
+export function createRankingSession() {
+  dispatch(UtilityActionCreators.goToRanking());
 }

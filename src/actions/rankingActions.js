@@ -14,3 +14,17 @@ export function nextTarget() {
   };
 }
 
+// Action creator for add one more item
+export function addTarget(newItem) {
+  return {
+    type: ActionTypes.ADD_TARGET,
+    payload: newItem,
+  };
+}
+
+// Action creator for end the session
+export function endSession() {
+  return {
+    type: ActionTypes.END_SESSION,
+  };
+}

@@ -7,8 +7,8 @@
 // ContentPresenter.js
 import RankingSession from '../views/Ranking/RankingSession.js';
 import RankingSessionPresenter from '../presenters/RankingSessionPresenter.js'; 
-import HomeView from './Pages/Home.js'; 
-import CreateView from './Pages/Create.js';
+import Create from '../views/Create.js';
+import CreatePresenter from '../presenters/CreatePresenter.js';
 
 class ContentPresenter {
     constructor(contentView) {
@@ -36,8 +36,8 @@ class ContentPresenter {
                 break;
             case "create":
                 // Initialize CreateView and CreatePresenter
-                // this.componentView = new CreateView();
-                // this.componentPresenter = new CreatePresenter(this.componentView);
+                this.componentView = new Create();
+                this.componentPresenter = new CreatePresenter(this.componentView);
                 break;
             default:
                 // Initialize HomeView and HomePresenter

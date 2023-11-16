@@ -58,6 +58,11 @@ nav {
     margin-right: 30px;
 }
 
+#logo {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
 #menu {
     font-size: 1.3rem;
 }

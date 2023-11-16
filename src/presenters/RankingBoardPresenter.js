@@ -16,6 +16,7 @@ class RankingBoardPresenter {
         StateManager.registerListener(this.handleRatingStateChange, ['targets','currentTargetIndex','targetRatings']);
         StateManager.registerListener(this.handleRankingStateChange, ['sortedRankings']);
         StateManager.registerListener(this.handleTargetRatingDone, ['targetRatingDone']);
+        StateManager.registerListener(this.handleIsSessionInProgressChange, ['isSessionInProgress']);
         this.initializeView();
     }
 
@@ -30,6 +31,7 @@ class RankingBoardPresenter {
         this.view.renderRankingSection();
     }
 
+    // state change handlers
     handleRatingStateChange = () => {
         // Fetch the updated data needed for the RankingBoard
         const ratedTargets = StateManager.getTargets();
@@ -62,14 +64,24 @@ class RankingBoardPresenter {
         }
     }
 
-    nextTarget() {
-        dispatch(RankingActions.nextTarget());
+    handleIsSessionInProgressChange = () => {
+        // when the session is ended, show the final ranking
+        this.view.showFinalRanking();
+    }
+
+    // dispatch functions
+    nextTarget(addNewItem) {
+        if (addNewItem) {
+            dispatch(RankingActions.addTarget(addNewItem));
+        } else {
+            dispatch(RankingActions.nextTarget());
+        }
     }
 
     endSession() {
-        console.log("over");
-        // dispatch(RankingActions.endSession());
+        dispatch(RankingActions.endSession());
     }
+
 }
 
 export default RankingBoardPresenter;
