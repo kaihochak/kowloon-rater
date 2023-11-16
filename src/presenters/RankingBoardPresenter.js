@@ -31,8 +31,6 @@ class RankingBoardPresenter {
     }
 
     handleRatingStateChange = () => {
-        // console.log("RankingBoardPresenter handling rating state change");
-
         // Fetch the updated data needed for the RankingBoard
         const ratedTargets = StateManager.getTargets();
         const currentTargetID = StateManager.getCurrentTargetID();
@@ -50,8 +48,10 @@ class RankingBoardPresenter {
     }
 
     handleTargetRatingDone = (state) => {
+        // when the target rating is done, highlight the current target
         if (state.targetRatingDone) {
-            this.view.highlightCurrentTarget();
+            this.view.highlightCurrentTarget(state.isLastItem);
+        // when user ready to go to next item, unhighlight the current target
         } else {
             // Fetch the updated data needed for the RankingBoard
             const ratedTargets = StateManager.getTargets();
@@ -64,6 +64,11 @@ class RankingBoardPresenter {
 
     nextTarget() {
         dispatch(RankingActions.nextTarget());
+    }
+
+    endSession() {
+        console.log("over");
+        // dispatch(RankingActions.endSession());
     }
 }
 

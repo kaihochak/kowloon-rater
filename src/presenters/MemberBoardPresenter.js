@@ -39,8 +39,6 @@ class MemberBoardPresenter {
     }
 
     handleSubmitRating(ratingValue) {
-        // console.log("Rating submitted for", this.currentMemberName, ":", ratingValue);
-
         // Dispatch an action to submit the rating
         dispatch(MemberActions.submitRating(this.currentMemberIndex, StateManager.getCurrentTargetID(), parseFloat(ratingValue)));
 

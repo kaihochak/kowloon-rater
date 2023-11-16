@@ -82,9 +82,7 @@ class RankingBoard {
         }
     }
 
-    highlightCurrentTarget() {
-        // console.log("RankingBoard.js: Highlighting current target");
-
+    highlightCurrentTarget(isLastItem) {
         // Add overlay
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
@@ -96,18 +94,54 @@ class RankingBoard {
         centeredTargetCard.classList.add('highlighted');
         centeredTargetCard.classList.add('centered-ratingCard');
 
-        // Next Button to close popup
-        const nextButton = document.createElement('button');
-        centeredTargetCard.appendChild(nextButton)
-        document.body.appendChild(centeredTargetCard);
-        nextButton.className = 'nextButton';
-        nextButton.innerHTML = "Next";
+        // Show the final rating
+        if (!isLastItem) {            
+            // Next Button to close popup
+            const nextButton = document.createElement('button');
+            centeredTargetCard.appendChild(nextButton)
+            document.body.appendChild(centeredTargetCard);
+            nextButton.className = 'nextButton';
+            nextButton.innerHTML = "Next";
 
-        // Close popup when next button is clicked
-        nextButton.addEventListener('click', () => {
-            this.presenter.nextTarget();
-        });
+            // Close popup when next button is clicked
+            nextButton.addEventListener('click', () => {
+                this.presenter.nextTarget();
+            });
+        // if there is no more item, ask if the user wants to end the session or add one more item
+        } else {
+            const buttons = document.createElement('div');
+            buttons.className = 'buttons';
+            centeredTargetCard.appendChild(buttons)
+            document.body.appendChild(centeredTargetCard);
 
+            // End Button to end the session
+            const endButton = document.createElement('button');
+            centeredTargetCard.appendChild(endButton)
+            endButton.className = 'endButton';
+            endButton.innerHTML = "End session";
+            buttons.appendChild(endButton);
+
+            // Close popup when next button is clicked
+            endButton.addEventListener('click', () => {
+                this.presenter.endSession();
+            });
+
+            // Add Another Rated Target
+            const newItem = document.createElement('div');
+            newItem.className = 'additem-input-container';
+            newItem.innerHTML = `
+                <input type="text" id="addNewItem" placeholder="add more">
+                <button id="addNewItemButton" class="endButton">Add</button>
+            `;
+            buttons.appendChild(newItem);
+            
+            // Close popup when add button is clicked
+            let addNewItemButton = document.getElementById('addNewItemButton');
+            let addNewItem = document.getElementById('addNewItem');
+            addNewItemButton.addEventListener('click', () => {
+                // this.presenter.nextTarget(addNewItem.value);
+            });
+        }
     }
 
     nextTarget(ratedTargets, currentTargetID, currentRating) {

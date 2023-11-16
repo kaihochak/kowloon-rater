@@ -38,11 +38,9 @@ class AppPresenter {
             }
         });
 
-        document.getElementById("create").addEventListener("click", () => {
-            this.initializeContent("create"); // Reinitialize the content with Create component
-        });
-
-        // Add other event listeners as needed
+        // document.getElementById("create").addEventListener("click", () => {
+        //     this.initializeContent("create"); // Reinitialize the content with Create component
+        // });
     }
 
     initializeNav() {

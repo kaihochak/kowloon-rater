@@ -37,6 +37,10 @@ export default function getChangedParts(newState, oldState) {
         changed.push('isSessionInProgress');
     }
 
+    if (newState.isLastItem !== oldState.isLastItem) {
+        changed.push('isLastItem');
+    }
+
     return changed;
 }
 

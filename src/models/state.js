@@ -6,12 +6,13 @@ import getChangedParts from '../utils/checkChanges.js';
 let state = {
   rankingName: "Fruits",
   memberNames: ["Ching", "Kai", "A-A-Ron", "B. Ennis", "Rich Serg.", "ObMa", "T. $helby", "Mr. Perv"],
-  targets: ["Apple", "Banana", "Orange", "Pear", "Pineapple", "Strawberry", "Watermelon", "Grape"],
+  targets: ["Apple", "Banana"],
   targetRatings: new Map(),
   sortedRankings: [],
   currentTargetIndex: 0,
   targetRatingDone: false,
   isSessionInProgress: false,
+  isLastItem: false,
 };
 
 let oldState = { ...state };
@@ -54,11 +55,20 @@ function reducer(state, action) {
       };
 
     case ActionTypes.SHOW_FINAL_RATING:
-      // Return a new state object with the updated targetRatingDone
-      return {
-        ...state,
-        targetRatingDone: true
-      };
+      // if it is the last item
+      if (state.targets.length == state.currentTargetIndex+1) {
+        return {
+          ...state,
+          targetRatingDone: true,
+          isLastItem: true,
+        };
+      // otherwise, return a new state object with the updated targetRatingDone
+      } else {
+        return {
+          ...state,
+          targetRatingDone: true
+        };
+      }
 
     case ActionTypes.SET_NEXT_TARGET:
       return {
@@ -169,4 +179,8 @@ export function setRankingName(name) {
 
 export function getRankedTargets() {
   return state.sortedRankings;
+}
+
+export function getIsLastItem() {
+  return state.isLastItem;
 }

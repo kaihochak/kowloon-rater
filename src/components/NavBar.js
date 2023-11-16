@@ -17,20 +17,25 @@ class NavBar {
         const navElement = document.createElement("nav");
         navElement.innerHTML = ''; // Clear existing content
         navElement.innerHTML = `
-            <div id="left-nav" class="box">
-                <span>
-                    <h2 href="#" id="menu">Menu</h2>
-                </span>
-            </div>
             <h2 id="logo" class="box">
                 <span>KOWLOON RATER</span>
             </h1>
-            <div id="right-nav" class="box">
-                <span>
-                    <h2 href="#" id="create">Create</h2>
-                </span>
-            </div>
         `;
+    //     navElement.innerHTML = `
+    //     <div id="left-nav" class="box">
+    //         <span>
+    //             <h2 href="#" id="menu">Menu</h2>
+    //         </span>
+    //     </div>
+    //     <h2 id="logo" class="box">
+    //         <span>KOWLOON RATER</span>
+    //     </h1>
+    //     <div id="right-nav" class="box">
+    //         <span>
+    //             <h2 href="#" id="create">Create</h2>
+    //         </span>
+    //     </div>
+    // `;
         return navElement;
     }
 
@@ -46,8 +51,8 @@ class NavBar {
     attachEventListeners() {
         // Attach event listeners to the nav element and delegate events to the presenter
         this.navElement.querySelector("#logo").addEventListener("click", () => this.presenter.onLogoClick());
-        this.navElement.querySelector("#create").addEventListener("click", () => this.presenter.onCreateClick());
-        // Add more listeners as needed
+        // this.navElement.querySelector("#logo").addEventListener("click", () => this.presenter.onLogoClick());
+        // this.navElement.querySelector("#create").addEventListener("click", () => this.presenter.onCreateClick());
     }
 }
 

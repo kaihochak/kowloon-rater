@@ -33,12 +33,12 @@ class MemberBoard {
 
       // submit rating
       this.submitButton.addEventListener("click", () => {
-        if (this.currentRatingInput.value <= 10) {
+        if (this.currentRatingInput.value && this.currentRatingInput.value <= 10) {
           this.presenter.handleSubmitRating(this.currentRatingInput.value);
         }
       });
       this.currentRatingInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter" && this.currentRatingInput.value <= 10) {
+        if (event.key === "Enter" && this.currentRatingInput.value && this.currentRatingInput.value <= 10) {
           this.presenter.handleSubmitRating(this.currentRatingInput.value);
         }
       });
@@ -49,7 +49,8 @@ class MemberBoard {
   updateCurrentRater(name) {
     this.currentRaterImg.style.backgroundImage = `url(./assets/images/${name}.jpg)`;
     this.currentRaterName.innerHTML = name;
-    this.ratingSlider.value = this.currentRatingInput.value = 5;
+    this.ratingSlider.value = this.currentRatingInput.value = "";
+
   }
 
   // Update the waitlist
@@ -83,10 +84,10 @@ class MemberBoard {
     currentRating.className = "currentRating";
     currentRating.innerHTML = `
         <div class="input-container">
-            <input type="number" id="ratingInput" value="${firstRating}" min="0" max="10" step="0.1">
+            <input type="number" id="ratingInput" value="5" min="0" max="10" step="0.1">
             <button id="submitRating" class="nextButton">Next</button>
         </div>
-        <input type="range" id="ratingSlider" value="${firstRating}" min="0" max="10" step="0.1">
+        <input type="range" id="ratingSlider" value="5" min="0" max="10" step="0.1">
     `;
 
     // Store elements that need event listeners
