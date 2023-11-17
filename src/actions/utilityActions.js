@@ -15,9 +15,9 @@ export function goToCreate() {
 }
 
 // Action creator for Create a Ranking Session
-export function goToRanking(rankingName, memberNames) {
+export function goToRanking(rankingName, targetNames, memberNames) {
   return {
     type: ActionTypes.GO_TO_RANKING,
-    payload: { rankingName, memberNames },
+    payload: { rankingName, targetNames, memberNames },
   };
 }

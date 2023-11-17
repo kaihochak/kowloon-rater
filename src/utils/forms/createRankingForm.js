@@ -1,8 +1,15 @@
+/* <!-- Course: SENG 513 --> 
+<!-- Date: Nov 10, 2023 --> 
+<!-- Assignment 3 -->
+<!-- Name: Kai Ho Chak --> 
+<!-- UCID: 30147119 --> */
+
 import * as StateManager from "../../models/state.js";
 import RankingSession from "../../views/Ranking/RankingSession.js";
 
 const formData = {
     rankingName: "", // Initialize with empty values
+    targetNames: [],
     numMembers: 1,
     memberNames: [],
 };
@@ -15,10 +22,13 @@ function createRankingForm() {
     createRankForm.id = "createRankForm";
     createRankForm.innerHTML = `
         <div class="formTitle">
-            <h3>Create ranking</h3>
+            <h3>Create Ranking</h3>
         </div>
         <form class="formContent">
-            <input type="text" id="rankingName" name="rankingName" placeholder="Ranking name">
+            <input type="text" id="rankingName" name="rankingName" placeholder="Title">
+            <input type="text" class="rateTarget" name="rankingName" placeholder="Target 1">
+            <input type="text" class="rateTarget" name="rankingName" placeholder="Target 2">
+            <input type="text" class="rateTarget" name="rankingName" placeholder="Target 3">
             <select id="numMembers" name="numMembers" >
                 <option disabled selected>Number of members</option>
                 <option value="1">1</option>
@@ -51,10 +61,25 @@ function createRankingForm() {
     submitButton.addEventListener('click', (e) => {
         e.preventDefault(); // Prevent the form from submitting
 
-        // Retrieve the member names
         let isValid = false;
-        const memberInputs = createRankForm.querySelectorAll("#memberInputs input")
 
+        // Retrieve the target names
+        const targetInputs = createRankForm.querySelectorAll(".rateTarget");
+        targetInputs.forEach((targetInput, index) => {
+            if (targetInput.value == "") {
+                isValid = false;
+                targetInput.focus();
+                targetInput.style.border = "1px solid red";
+            } else {
+                isValid = true;
+                targetInput.style.border = "1px solid black";
+                formData.targetNames[index] = targetInput.value;
+            }
+        });
+
+        // Retrieve the member names
+        const memberInputs = createRankForm.querySelectorAll("#memberInputs input")
+    
         // Validate the member names and store them in the formData object
         memberInputs.forEach((memberInput, index) => {
             if (memberInput.value == "") {
@@ -76,7 +101,7 @@ function createRankingForm() {
             formData.rankingName = rankingName;
             
             // Create a ranking session
-            StateManager.createRankingSession(formData.rankingName, formData.memberNames);
+            StateManager.createRankingSession(formData.rankingName, formData.targetNames, formData.memberNames);
         }
     });
 

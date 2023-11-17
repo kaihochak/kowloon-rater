@@ -33,12 +33,6 @@ class MemberBoardPresenter {
         this.view.attachEventListeners();
     }
 
-    setCurrentMemberName(name) {
-        this.currentMemberName = name;
-        // Update the view with the new current member name
-        this.view.updateCurrentRater(this.currentMemberName);
-    }
-
     submitRating(ratingValue) {
         // Dispatch an action to submit the rating
         dispatch(MemberActions.submitRating(this.currentMemberIndex, StateManager.getCurrentTargetID(), parseFloat(ratingValue)));
@@ -52,7 +46,7 @@ class MemberBoardPresenter {
             this.currentMemberIndex = 0;
             dispatch(MemberActions.showFinalRating());
         }
-        this.view.updateCurrentRater(StateManager.getMemberName(this.currentMemberIndex));
+        this.view.updateCurrentRater(StateManager.getMemberName(this.currentMemberIndex), this.currentMemberIndex);
 
         // Update the view with the new wailist member names
         this.view.updateWaitlistRaters(this.memberNames, this.currentMemberIndex);

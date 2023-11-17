@@ -46,8 +46,9 @@ class MemberBoard {
   }
 
   // Update the current rater's name
-  updateCurrentRater(name) {
-    this.currentRaterImg.style.backgroundImage = `url(./assets/images/${name}.jpg)`;
+  updateCurrentRater(name, index) {
+    let image = this.currentRaterImg.querySelector("img");
+    image.src = `./src/assets/${index}.png`;
     this.currentRaterName.innerHTML = name;
     this.ratingSlider.value = this.currentRatingInput.value = "";
   }
@@ -62,6 +63,7 @@ class MemberBoard {
   createMemberBoardElement() {
     const memberBoard = document.createElement("div");
     memberBoard.className = "memberBoard";
+        
     return memberBoard;
   }
 
@@ -72,7 +74,7 @@ class MemberBoard {
     // Current rater
     const currentRater = document.createElement("div");
     currentRater.className = "currentRater";
-    currentRater.appendChild(MemberCard(firstMember)); // Use firstMember for the MemberCard
+    currentRater.appendChild(MemberCard(firstMember, 0));
     currentRate.appendChild(currentRater);
 
     this.currentRaterImg = currentRater.querySelector(".memberImg");
@@ -109,15 +111,18 @@ class MemberBoard {
     const startPart = memberNames.slice(0, currentRaterIndex);
     const wrappedArray = endPart.concat(startPart);
 
-    wrappedArray.forEach(memberName => {
-      waitlistRater.appendChild(MemberCard(memberName));
-    });
+    for (let i = 1; i < wrappedArray.length+1; i++) {
+      let index = currentRaterIndex + i;
+      if (index >= memberNames.length) {
+        index -= memberNames.length;
+      }
+      waitlistRater.appendChild(MemberCard(memberNames[index], index));
+    }
 
     return waitlistRater;
   }
 
   render(firstMember, memberNames, currentRaterIndex) {
-    // console.log("MemberBoard.render() called");
     // Current Rate section
     const currentRate = this.createCurrentRateSection(firstMember, 5);
     // Waitlist Rater section
@@ -125,17 +130,23 @@ class MemberBoard {
 
     this.memberBoardElement.appendChild(currentRate);
     this.memberBoardElement.appendChild(this.waitlistRater);
+
+    // licnese attribute
+    const license = document.createElement("div");
+    license.className = "license";
+    license.innerHTML = `
+      <a href="https://www.flaticon.com/packs/avatars-60" title="Icon Pack: Avatars | Flat">Icon Pack: Avatars | Flat created by Adib Sulthon - Flaticon</a>
+    `;
+    this.memberBoardElement.appendChild(license);
   }
 
   disableRating() {
-    // console.log("MemberBoard.disableRating() called");
     this.currentRatingInput.disabled = true;
     this.ratingSlider.disabled = true;
     this.submitButton.disabled = true;
   }
 
   enableRating() {
-    // console.log("MemberBoard.enableRating() called");
     this.currentRatingInput.disabled = false;
     this.ratingSlider.disabled = false;
     this.submitButton.disabled = false;

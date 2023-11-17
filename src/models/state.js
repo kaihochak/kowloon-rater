@@ -13,7 +13,7 @@ import getChangedParts from '../utils/checkChanges.js';
 let state = {
   page: "ranking",
   rankingName: "Footballers",
-  memberNames: ["Ching", "Kai", "A-A-Ron", "B. Ennis", "Rich Serg.", "ObMa", "T. $helby", "Mr. Perv"],
+  memberNames: ["Kai", "Ben Dover", "Indy Gestion", "Hugh Jass", "Claire Annette", "Liz Anya", "Phil Latio", "Anita Bath", "Maya Grain", "Sum Ting Wong" ],
   targets: ["George Best", "Diego Maradona", "Cristiano Ronaldo", "Ronaldo Nazário", "Zinedine Zidane", "Alfredo Di Stefano","Johan Cruyff" , "Franz Beckenbauer","Lionel Messi", "Pele"],
   targetRatings: new Map(),
   sortedRankings: [],
@@ -50,6 +50,7 @@ function reducer(state, action) {
         ...state,
         page: "ranking",
         rankingName: action.payload.rankingName,
+        targets: action.payload.targetNames,
         memberNames: action.payload.memberNames,
         isSessionInProgress: true
       };
@@ -148,7 +149,6 @@ export function dispatch(action) {
 }
 
 function notifyListeners(changedParts) {
-  console.log("Notifying listeners", changedParts);
   // Notify all listeners that are subscribed to the changed parts
   listeners.forEach(({ listener, subscribedParts }) => {
     // If the listener is subscribed to any of the changed parts, notify it
@@ -220,9 +220,9 @@ export function getIsLastItem() {
   return state.isLastItem;
 }
 
-export function createRankingSession(rankingName, memberNames) {
+export function createRankingSession(rankingName, targetNames, memberNames) {
   clearState();
-  dispatch(UtilityActionCreators.goToRanking(rankingName, memberNames));
+  dispatch(UtilityActionCreators.goToRanking(rankingName, targetNames, memberNames));
 }
 
 function clearState() {
