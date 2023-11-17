@@ -1,3 +1,10 @@
+/* <!-- Course: SENG 513 --> 
+<!-- Date: Nov 10, 2023 --> 
+<!-- Assignment 3 -->
+<!-- Name: Kai Ho Chak --> 
+<!-- UCID: 30147119 --> */
+
+// state.js
 import * as ActionTypes from './actionTypes.js';
 import * as UtilityActionCreators from '../actions/utilityActions.js';
 import * as RankingActionCreators from '../actions/rankingActions.js';
@@ -5,7 +12,7 @@ import getChangedParts from '../utils/checkChanges.js';
 
 let state = {
   page: "ranking",
-  rankingName: "Fruits",
+  rankingName: "Footballers",
   memberNames: ["Ching", "Kai", "A-A-Ron", "B. Ennis", "Rich Serg.", "ObMa", "T. $helby", "Mr. Perv"],
   targets: ["George Best", "Diego Maradona", "Cristiano Ronaldo", "Ronaldo Nazário", "Zinedine Zidane", "Alfredo Di Stefano","Johan Cruyff" , "Franz Beckenbauer","Lionel Messi", "Pele"],
   targetRatings: new Map(),
@@ -31,9 +38,6 @@ export function registerListener(listener, subscribedParts) {
 function reducer(state, action) {
   switch (action.type) {
 
-    case undefined:
-      return state;
-
     // Utility actions
     case ActionTypes.GO_TO_CREATE:
       return {
@@ -44,7 +48,10 @@ function reducer(state, action) {
     case ActionTypes.GO_TO_RANKING:
       return {
         ...state,
-        page: "ranking"
+        page: "ranking",
+        rankingName: action.payload.rankingName,
+        memberNames: action.payload.memberNames,
+        isSessionInProgress: true
       };
 
     // member submitting a rating for a target
@@ -71,7 +78,6 @@ function reducer(state, action) {
       };
 
     case ActionTypes.SHOW_FINAL_RATING:
-      console.log("AAA");
       // if it is the last item
       if (state.targets.length == state.currentTargetIndex+1) {
         return {
@@ -142,6 +148,7 @@ export function dispatch(action) {
 }
 
 function notifyListeners(changedParts) {
+  console.log("Notifying listeners", changedParts);
   // Notify all listeners that are subscribed to the changed parts
   listeners.forEach(({ listener, subscribedParts }) => {
     // If the listener is subscribed to any of the changed parts, notify it
@@ -213,6 +220,23 @@ export function getIsLastItem() {
   return state.isLastItem;
 }
 
-export function createRankingSession() {
-  dispatch(UtilityActionCreators.goToRanking());
+export function createRankingSession(rankingName, memberNames) {
+  clearState();
+  dispatch(UtilityActionCreators.goToRanking(rankingName, memberNames));
+}
+
+function clearState() {
+  state = {
+    page: "",
+    rankingName: "",
+    memberNames: [],
+    targets: [],
+    targetRatings: new Map(),
+    sortedRankings: [],
+    currentTargetIndex: 0,
+    targetRatingDone: false,
+    isSessionInProgress: false,
+    isLastItem: false,
+  };
+  oldState = { ...state };
 }

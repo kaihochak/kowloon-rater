@@ -58,11 +58,20 @@ function addNewButton(queueContainer) {
         const newRow = createQueueRow("");
         const newItem = newRow.firstChild
         newItem.addEventListener('click', rename);
-        newItem.click();
-        newItem.focus();
         
-        newRow.appendChild(newItem);
-        queueContainer.insertBefore(newRow, addButton);
+        // Append the new row to the queue
+        const queueItems = queueContainer.querySelector('.queue-items');
+        queueItems.appendChild(newRow);
+ 
+        // Scroll the new row into view
+        newRow.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+
+        // Focus on the new item
+        newItem.click();
+        const inputField = newItem.querySelector('.queue-input');
+        if (inputField) {
+            inputField.focus();
+        }
     });
 
     queueContainer.appendChild(addButton);
@@ -104,23 +113,23 @@ function createQueueRow(item) {
         contextMenu.style.display = 'block';
     });
 
-
-
     queueRow.appendChild(queueItem);
-
-    
-
     return queueRow;
 }
 
 function Queue(items) {
     const queueContainer = document.createElement('div');
     queueContainer.className = 'queue-container rankingBoard-cards';
+    
+    const queueItems = document.createElement('div');
+    queueItems.className = 'queue-items';
 
     items.forEach((item) => {
         const queueRow = createQueueRow(item);
-        queueContainer.appendChild(queueRow);
+        queueItems.appendChild(queueRow);
     });
+
+    queueContainer.appendChild(queueItems);
 
     // "+ New" button to add new rows 
     addNewButton(queueContainer);

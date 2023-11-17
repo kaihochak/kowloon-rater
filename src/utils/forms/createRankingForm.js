@@ -51,16 +51,33 @@ function createRankingForm() {
     submitButton.addEventListener('click', (e) => {
         e.preventDefault(); // Prevent the form from submitting
 
-        // Retrieve the selected number of members
-        const numMembers = parseInt(numMembersSelect.value);
+        // Retrieve the member names
+        let isValid = false;
+        const memberInputs = createRankForm.querySelectorAll("#memberInputs input")
 
-        // Retrieve the ranking name
-        const rankingNameInput = createRankForm.querySelector("#rankingName");
-        const rankingName = rankingNameInput.value;
-        formData.rankingName = rankingName;
-        
-        // Create a ranking session
-        renderRankingSession();
+        // Validate the member names and store them in the formData object
+        memberInputs.forEach((memberInput, index) => {
+            if (memberInput.value == "") {
+                isValid = false;
+                memberInput.focus();
+                memberInput.style.border = "1px solid red";
+            } else {
+                isValid = true;
+                memberInput.style.border = "1px solid black";
+                formData.memberNames[index] = memberInput.value;
+            }
+        });
+
+        // only create a ranking session if all member names are valid
+        if (isValid) {
+            // Retrieve the ranking name
+            const rankingNameInput = createRankForm.querySelector("#rankingName");
+            const rankingName = rankingNameInput.value;
+            formData.rankingName = rankingName;
+            
+            // Create a ranking session
+            StateManager.createRankingSession(formData.rankingName, formData.memberNames);
+        }
     });
 
     // append the form to the content element
@@ -105,16 +122,6 @@ function createMemberNameInputs(numMembers) {
             formData.memberNames[index] = memberInput.value;
         });
     });
-}
-
-// Function to render a ranking session
-function renderRankingSession() {
-    // Render the ranking session
-    const contentElement = document.getElementById("content");
-    contentElement.appendChild( (formData));
-
-    // update the state to indicate that a session is in progress
-    StateManager.updateSessionInProgress(true);
 }
 
 export default createRankingForm;

@@ -34,15 +34,16 @@ class ContentPresenter {
                 this.componentView = new RankingSession();
                 this.componentPresenter = new RankingSessionPresenter(this.componentView);
                 break;
+            case "ranking":
+                this.componentView = new RankingSession();
+                this.componentPresenter = new RankingSessionPresenter(this.componentView);
+                break;
             case "create":
                 // Initialize CreateView and CreatePresenter
                 this.componentView = new Create();
                 this.componentPresenter = new CreatePresenter(this.componentView);
                 break;
             default:
-                // Initialize HomeView and HomePresenter
-                // this.componentView = new HomeView();
-                // this.componentPresenter = new HomePresenter(this.componentView);
                 break;
         }
 

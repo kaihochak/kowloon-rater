@@ -48,10 +48,9 @@ class AppPresenter {
 
     handlePageChange = (state) => {
         if (state.page == "create") {
-            console.log("appPresenter.js: Page changed to create");
             this.initializeContent("create");
         } else if (state.page == "ranking") {
-            console.log("appPresenter.js: Page changed to ranking");
+            this.initializeContent("ranking");
         }
         return 
     }

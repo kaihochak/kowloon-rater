@@ -1,6 +1,8 @@
 
 // Utility Actions
 export const SET_SESSION_PROGRESS = 'SET_SESSION_PROGRESS';
+export const GO_TO_CREATE = 'GO_TO_CREATE';
+export const GO_TO_RANKING  = 'GO_TO_RANKING';
 
 // MemberBoard Actions
 export const SUBMIT_RATING = 'SUBMIT_RATING';

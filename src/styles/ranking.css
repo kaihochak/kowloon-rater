@@ -76,9 +76,18 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  height: auto;
+  max-height: 240px;
   width: 30%;
   background-color: white;
+}
+
+.queue-items {
+  overflow-y: auto;
+}
+
+.queue-items > :first-child{
+  color: #1c1c1c;
+  background-color: #A8F5DB;
 }
 
 .queue-item {
@@ -90,10 +99,6 @@
   border: 0.5px solid #1c1c1c;
 }
 
-.queue-container > :first-child{
-  color: #1c1c1c;
-  background-color: #A8F5DB;
-}
 
 .queue-input {
   padding-block: 10px;

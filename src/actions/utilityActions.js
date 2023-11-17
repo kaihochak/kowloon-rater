@@ -9,15 +9,15 @@ import * as ActionTypes from "../models/actionTypes.js";
 
 // Action creator for Create a Form
 export function goToCreate() {
-  console.log("AAA");
   return {
     type: ActionTypes.GO_TO_CREATE,
   };
 }
 
 // Action creator for Create a Ranking Session
-export function goToRanking() {
+export function goToRanking(rankingName, memberNames) {
   return {
     type: ActionTypes.GO_TO_RANKING,
+    payload: { rankingName, memberNames },
   };
 }
