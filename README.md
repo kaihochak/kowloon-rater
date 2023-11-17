@@ -37,4 +37,4 @@ Kowloon Rater is developed with a focus on desktop use. A newer React applicatio
 ## Game Screenshot
 ![Kowloon Rater Screenshot](./src//assets/game.png)
 ![Kowloon Rater Screenshot](./src//assets/rating.png)
-![Kowloon Rater Screenshot](./src//assets/rank.png.png)
+![Kowloon Rater Screenshot](./src//assets/rank.png)
